@@ -1,0 +1,26 @@
+*{margin:0;padding:0}
+
+img{
+	width: 500px;
+	margin-left: 2%;
+	margin-bottom: 5%;
+	margin-top: 1%;
+}
+
+div.h1{
+	padding:0 0 1% 2%;
+	background-color: skyblue;
+	color:black;
+
+}
+
+div.h2{
+	color:rgb(255, 0, 247);
+	margin-top: 2%;
+}
+
+div.li{
+	font-weight: bold;
+	line-height: 35px;
+	margin-left: 1%;
+}
