@@ -1,33 +1,29 @@
-/*マルチメディアシステム概論*/
 
-/*デフォルトの設定*/
 *{margin:0;padding:0}
 
-/*ヘッダの設定*/
+
 div.he{
-	/*ボックスの設定*/
-	padding: 0 0 3% 2%;/*枠内余白（上右下左）*/
-	background: skyblue;/*背景色*/
-	/*文字の設定*/
-	color: white;/*文字の色*/
 	
+	padding: 0 0 3% 2%;
+	background: skyblue;
+	color: white;
 }
 
-/*親コンテナの設定*/
+
 body{
     background-image: url("PXL_20221125_022306093.jpg");
 	background-size: cover;
 	background-origin: content-box;
 }
-/*コンテンツの設定*/
+
 div.co{
-	/*ボックスの設定*/
-	width: 20%;/*幅*/
-	height: 60px;/*高さ*/
-	padding: 0 0 0 2%;/*枠内余白（上右下左）*/
-	background: #F3FA78;/*背景色*/
+	
+	width: 20%;
+	height: 60px;
+	padding: 0 0 0 2%;
+	background: #F3FA78;
 }
-/*ナビの設定*/
+
 div.na{
 	
 	position: fixed;top: 200px;left: 600px;
@@ -37,13 +33,13 @@ div.na{
 div.na2{
 	
 	position: fixed;top: 500px;left: 320px;
-	/*ボックスの配置*/
+	
 }
 div.na3{
 	
 	
 	position: fixed;top:500px;left: 890px;
-	/*ボックスの配置*/
+	
 	
 }
 
@@ -57,9 +53,9 @@ a.link{
 	border-top-right-radius: 1000px 200px;
 	border-bottom-left-radius: 1000px 200px;
 	border-bottom-right-radius: 1000px 200px;
-	width: 70%;/*幅*/
-	height: 10px;/*高さ*/
-	padding: 50px 40px 80px 50px;/*枠内余白（上右下左）*/
+	width: 70%;
+	height: 10px;
+	padding: 50px 40px 80px 50px;
 	background: #F3FA78;
 }
-/*フッターの設定*/
+
