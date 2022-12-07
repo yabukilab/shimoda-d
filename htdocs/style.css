@@ -32,4 +32,5 @@ a.bt{
 	background: skyblue;
 	color: #fff;
 	box-shadow: 0px 2px 4px #575;
+	position: fixed;top:600px;left: 500px;
   }
