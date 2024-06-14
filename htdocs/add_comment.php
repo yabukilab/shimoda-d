@@ -8,7 +8,7 @@ $conn = new mysqli($servername, "root", "", $dbname);
 if ($conn->connect_error) {
     die("データベースに接続できませんでした: " . $conn->connect_error);
 }
-//test
+
 // フォームからのデータを取得
 $game_id = $_POST['id'];
 $comment = $_POST['comment'];
