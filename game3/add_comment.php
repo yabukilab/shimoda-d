@@ -1,4 +1,5 @@
 <?php
+//test
 // データベース接続情報
 $servername = "localhost";
 $dbname = "game_database";
