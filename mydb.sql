@@ -1,15 +1,11 @@
-
--- データベースが存在する場合は削除します
-DROP DATABASE IF EXISTS shimodad;
-
 -- 新しいデータベースを作成します
-CREATE DATABASE shimodad;
+CREATE DATABASE IF NOT EXISTS shimodad;
 
+-- shimodadデータベースを使用します
 USE shimodad;
 
 -- gamesテーブルを作成します
-DROP TABLE IF EXISTS games;
-CREATE TABLE games (
+CREATE TABLE IF NOT EXISTS games (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     image MEDIUMBLOB NOT NULL,
@@ -20,8 +16,7 @@ CREATE TABLE games (
 );
 
 -- commentsテーブルを作成します
-DROP TABLE IF EXISTS comments;
-CREATE TABLE comments (
+CREATE TABLE IF NOT EXISTS comments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     game_id INT NOT NULL,
     comment TEXT NOT NULL,
