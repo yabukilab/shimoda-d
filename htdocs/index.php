@@ -8,6 +8,7 @@
     <ul>
         <li><a href="add_game.php">ゲーム追加ページ</a></li>
         <li><a href="game_list.php">紹介ページ一覧</a></li>
+        <li><a href="confirm.php">db確認</a></li>
     </ul>
 </body>
 </html>
