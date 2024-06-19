@@ -1,4 +1,8 @@
-CREATE DATABASE IF NOT EXISTS mydb;
+-- データベースが存在する場合は削除します
+DROP DATABASE IF EXISTS mydb;
+
+-- 新しいデータベースを作成します
+CREATE DATABASE mydb;
 
 USE mydb;
 
