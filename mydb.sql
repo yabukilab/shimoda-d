@@ -1,13 +1,7 @@
--- データベースが存在する場合は削除します
-DROP DATABASE IF EXISTS mydb;
 
--- 新しいデータベースを作成します
-CREATE DATABASE mydb;
+CREATE DATABASE shimodad;
 
-USE mydb;
-
-DROP TABLE IF EXISTS comments;
-DROP TABLE IF EXISTS games;
+USE shimodad;
 
 CREATE TABLE games (
     id INT AUTO_INCREMENT PRIMARY KEY,
