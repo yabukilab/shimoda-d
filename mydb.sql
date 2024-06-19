@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS games;
 CREATE TABLE games (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    image VARCHAR(255) NOT NULL,
+    image MEDIUMBLOB NOT NULL,
     rating DECIMAL(3,1) NOT NULL,
     introduction TEXT NOT NULL,
     user_code VARCHAR(50) NOT NULL,
