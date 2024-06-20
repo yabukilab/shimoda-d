@@ -69,9 +69,13 @@
             // 結果を取得
             $games = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // 結果を表示
-            foreach ($games as $game) {
-                echo "<li><a href='game_page.php?id=".$game["id"]."'>".$game["title"]."</a> - 評価点: ".$game["rating"]." - 追加日: ".$game["added_date"]."</li>";
+            if (count($games) > 0) {
+                // 結果を表示
+                foreach ($games as $game) {
+                    echo "<li><a href='game_page.php?id=".$game["id"]."'>".$game["title"]."</a> - 評価点: ".$game["rating"]." - 追加日: ".$game["added_date"]."</li>";
+                }
+            } else {
+                echo "<li>検索結果が見つかりませんでした</li>";
             }
         } catch (PDOException $e) {
             echo "Error: " . htmlspecialchars($e->getMessage());
