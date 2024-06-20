@@ -4,18 +4,22 @@ require 'db.php';
 
 try {
     // フォームからのデータを取得
-    $title = $_POST['title'];
-    $rating = $_POST['rating'];
-    $introduction = $_POST['introduction'];
-    $user_code = $_POST['user_code'];
+    $title = isset($_POST['title']) ? trim($_POST['title']) : '';
+    $rating = isset($_POST['rating']) ? trim($_POST['rating']) : '';
+    $introduction = isset($_POST['introduction']) ? trim($_POST['introduction']) : '';
+    $user_code = isset($_POST['user_code']) ? trim($_POST['user_code']) : '';
+
+    // 入力チェック
+    if (empty($title) || empty($rating) || empty($introduction) || empty($user_code)) {
+        throw new Exception("すべてのフォームフィールドを入力してください。");
+    }
 
     // 画像ファイルを処理
-    if (isset($_FILES['image'])) {
-        $errors = array();
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
         $file_tmp = $_FILES['image']['tmp_name'];
         $image = file_get_contents($file_tmp);
     } else {
-        throw new Exception("画像ファイルがアップロードされていません。");
+        throw new Exception("画像ファイルがアップロードされていないか、エラーが発生しました。");
     }
 
     // ゲームをデータベースに追加するSQLクエリ
@@ -36,6 +40,8 @@ try {
 
 } catch (Exception $e) {
     echo "エラー: " . $e->getMessage();
+    echo "<br>3秒後に追加ページに戻ります。";
+    header("refresh:3;url=add_game.php");
 }
 
 // 接続を閉じる
