@@ -23,16 +23,21 @@
         }
         .form-container {
             background-color: #ffffff;
-            padding: 30px;
+            padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 800px;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .form-container form {
             display: flex;
             flex-direction: column;
+            width: 100%;
+            max-width: 600px;
         }
         .form-container form label {
             margin-top: 10px;
