@@ -1,27 +1,58 @@
+php
+コードをコピーする
 <?php
 // db.phpをインクルード
 require 'db.php';
 
+// フォームからのデータを取得
+$title = isset($_POST['title']) ? trim($_POST['title']) : '';
+$rating = isset($_POST['rating']) ? trim($_POST['rating']) : '';
+$introduction = isset($_POST['introduction']) ? trim($_POST['introduction']) : '';
+$user_code = isset($_POST['user_code']) ? trim($_POST['user_code']) : '';
+
+// エラーメッセージを保持する配列
+$errors = array();
+
+// ゲームタイトルのバリデーション
+if (empty($title)) {
+    $errors[] = "ゲームタイトルが入力されていません。";
+}
+
+// 画像ファイルのバリデーション
+if (!isset($_FILES['image']) || $_FILES['image']['error'] != UPLOAD_ERR_OK) {
+    $errors[] = "ファイルが選択されていません。";
+} else {
+    $file_tmp = $_FILES['image']['tmp_name'];
+    $image = file_get_contents($file_tmp);
+}
+
+// 評価点のバリデーション
+if (empty($rating)) {
+    $errors[] = "評価点が入力されていません。";
+}
+
+// 紹介文のバリデーション
+if (empty($introduction)) {
+    $errors[] = "紹介文が記入されていません。";
+} elseif (strlen($introduction) > 400) {
+    $errors[] = "紹介文は400文字以内で記入してください。";
+}
+
+// ユーザーコードのバリデーション
+if (empty($user_code)) {
+    $errors[] = "ユーザーコードを入力してください。";
+} elseif (!preg_match('/^[a-zA-Z0-9]{8}$/', $user_code)) {
+    $errors[] = "ユーザーコードは8桁の半角アルファベット及び半角数字の組み合わせで入力してください。";
+}
+
+// エラーがある場合は処理を中断
+if (!empty($errors)) {
+    $message = implode("\n", $errors);
+    header("Location: add_game_error.php?message=" . urlencode($message));
+    exit();
+}
+
 try {
-    // フォームからのデータを取得
-    $title = isset($_POST['title']) ? trim($_POST['title']) : '';
-    $rating = isset($_POST['rating']) ? trim($_POST['rating']) : '';
-    $introduction = isset($_POST['introduction']) ? trim($_POST['introduction']) : '';
-    $user_code = isset($_POST['user_code']) ? trim($_POST['user_code']) : '';
-
-    // 入力チェック
-    if (empty($title) || empty($rating) || empty($introduction) || empty($user_code)) {
-        throw new Exception("すべてのフォームフィールドを入力してください。");
-    }
-
-    // 画像ファイルを処理
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-        $file_tmp = $_FILES['image']['tmp_name'];
-        $image = file_get_contents($file_tmp);
-    } else {
-        throw new Exception("画像ファイルがアップロードされていないか、エラーが発生しました。");
-    }
-
     // ゲームをデータベースに追加するSQLクエリ
     $sql = "INSERT INTO games (title, image, rating, introduction, user_code) VALUES (:title, :image, :rating, :introduction, :user_code)";
     $stmt = $db->prepare($sql);
