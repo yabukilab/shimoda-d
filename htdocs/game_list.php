@@ -9,12 +9,17 @@
     <form action="" method="get">
         <label for="search">検索:</label>
         <input type="text" id="search" name="search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+        <input type="submit" value="検索">
+    </form>
+    
+    <form action="" method="get">
+        <input type="hidden" name="search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
         <select name="sort">
             <option value="new" <?php if (isset($_GET['sort']) && $_GET['sort'] == 'new') echo 'selected'; ?>>新着順</option>
             <option value="rating" <?php if (isset($_GET['sort']) && $_GET['sort'] == 'rating') echo 'selected'; ?>>評価点順</option>
             <option value="alphabetical" <?php if (isset($_GET['sort']) && $_GET['sort'] == 'alphabetical') echo 'selected'; ?>>50音順</option>
         </select>
-        <input type="submit" value="検索">
+        <input type="submit" value="並び替え">
     </form>
 
     <ul>
@@ -94,7 +99,7 @@
         <?php if ($page < $total_pages): ?>
             <a href="?search=<?php echo urlencode($search); ?>&sort=<?php echo $sort_type; ?>&page=<?php echo $page + 1; ?>">次へ</a>
         <?php endif; ?>
+        <p>ページ <?php echo $page; ?> / <?php echo $total_pages; ?></p>
     </div>
 </body>
 </html>
-
