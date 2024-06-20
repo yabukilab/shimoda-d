@@ -1,5 +1,4 @@
-php
-コードをコピーする
+
 <?php
 // db.phpをインクルード
 require 'db.php';
