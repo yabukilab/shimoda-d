@@ -1,5 +1,3 @@
-php
-コードをコピーする
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +12,9 @@ php
 
     // URLパラメータからゲームIDを取得
     if (!isset($_POST['id']) || !isset($_POST['user_code']) || trim($_POST['user_code']) == '') {
-        $message = "ゲームIDまたはユーザーコードが設定されていません。";
-        if (trim($_POST['user_code']) == '') {
+        if (!isset($_POST['id'])) {
+            $message = "ゲームIDが設定されていません。";
+        } elseif (!isset($_POST['user_code']) || trim($_POST['user_code']) == '') {
             $message = "ユーザーコードが入力されていません。";
         }
         header("Location: edit_error.php?message=" . urlencode($message));

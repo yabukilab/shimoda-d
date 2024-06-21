@@ -1,4 +1,4 @@
-
+<?php
 require 'db.php';
 
 // フォームからのデータを取得
@@ -69,7 +69,7 @@ $db = null;
 <body>
     <div class="container">
         <p class="message"><?php echo $message; ?></p>
-        <?php if ($message !== "コメントが追加されました"): ?>
+        <?php if ($message === "コメントが追加されました"): ?>
             <p class="redirect">3秒後にトップページにリダイレクトします。</p>
         <?php endif; ?>
     </div>
