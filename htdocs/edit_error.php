@@ -1,16 +1,10 @@
-<?php
-session_start();
-
-// セッション変数 nowPage を取得する
-$nowPage = $_SESSION['nowPage'] ?? '';
-?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>エラー</title>
-    <meta http-equiv="refresh" content="3;url=<?php echo htmlspecialchars($nowPage); ?>">
+    <meta http-equiv="refresh" content="3;url=index.php">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -56,7 +50,7 @@ $nowPage = $_SESSION['nowPage'] ?? '';
                 echo nl2br(htmlspecialchars($message)) . "<br>";
             }
             ?>
-            <span class="redirect">3秒後に前のページに戻ります。</span>
+            <span class="redirect">3秒後にトップページに戻ります。</span>
         </p>
         <svg class="cross" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" fill="#f44336"/>
