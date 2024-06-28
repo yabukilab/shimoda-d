@@ -4,10 +4,9 @@
     <title>エラー</title>
     <?php
     session_start();
-    // セッションから前ページのURLを取得
-    $previousPage = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : 'index.php';
-    ?>
-    <meta http-equiv="refresh" content="3;url=<?php echo htmlspecialchars($previousPage); ?>">
+    $nowPage = $_SESSION['nowPage'] ?? '';
+    ?> 
+    <meta http-equiv="refresh" content="3;url=<?php echo htmlspecialchars($nowPage); ?>">
 </head>
 <body>
     <h1>エラーが発生しました</h1>

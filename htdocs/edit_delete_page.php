@@ -1,7 +1,12 @@
 <?php
 session_start();
-?>
 
+// 現在のページのURLを取得
+$nowPage = $_SERVER['REQUEST_URI'];
+
+// セッション変数に保存
+$_SESSION['nowPage'] = $nowPage;
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
