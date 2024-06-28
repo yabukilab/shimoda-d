@@ -1,4 +1,3 @@
-
 <?php
 // db.phpをインクルード
 require 'db.php';
@@ -70,7 +69,7 @@ try {
 
 } catch (Exception $e) {
     echo "エラー: " . $e->getMessage();
-    echo "<br>3秒後に追加ページに戻ります。";
+    echo "<br>3秒後に追加ページにリダイレクトします。";
     header("refresh:3;url=add_game.php");
 }
 

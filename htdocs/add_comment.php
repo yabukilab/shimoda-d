@@ -10,7 +10,8 @@ $message = "";
 
 // コメントが空の場合はエラーメッセージを設定
 if (trim($comment) == '') {
-    $message = "コメントが入力されていません";
+    $message = "コメントが入力されていません\n3秒後にトップページにリダイレクトします。";
+    header("refresh:3;url=index.php");
 } else {
     // コメントをデータベースに追加するSQLクエリ
     $sql = "INSERT INTO comments (game_id, comment, user_name) VALUES (:game_id, :comment, :user_name)";
@@ -25,6 +26,7 @@ if (trim($comment) == '') {
         header("refresh:3;url=index.php");
     } catch(PDOException $e) {
         $message = "エラー: " . $e->getMessage();
+        header("refresh:3;url=index.php");
     }
 }
 
@@ -68,10 +70,7 @@ $db = null;
 </head>
 <body>
     <div class="container">
-        <p class="message"><?php echo $message; ?></p>
-        <?php if ($message === "コメントが追加されました"): ?>
-            <p class="redirect">3秒後にトップページにリダイレクトします。</p>
-        <?php endif; ?>
+        <p class="message"><?php echo nl2br(htmlspecialchars($message)); ?></p>
     </div>
 </body>
 </html>
