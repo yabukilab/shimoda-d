@@ -3,8 +3,9 @@
 <head>
     <title>エラー</title>
     <?php
-    // 前ページのURLを取得
-    $previousPage = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php';
+    session_start();
+    // セッションから前ページのURLを取得
+    $previousPage = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : 'index.php';
     ?>
     <meta http-equiv="refresh" content="3;url=<?php echo htmlspecialchars($previousPage); ?>">
 </head>
@@ -18,3 +19,4 @@
     ?></p>
 </body>
 </html>
+
