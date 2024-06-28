@@ -26,15 +26,12 @@ if ($action == 'edit') {
         $errors[] = "紹介文が400文字を超えています。";
     }
 
-   // エラーがある場合は処理を中断
-if (!empty($errors)) {
-    $message = implode("\n", $errors);
-    $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : 'index.php';
-    header("Location: edit_error.php?message=" . urlencode($message) . "&redirect=" . urlencode($redirect_url));
-    exit();
-}
-
-// 他のエラー処理箇所も同様に修正
+    // エラーがある場合は処理を中断
+    if (!empty($errors)) {
+        $message = implode("\n", $errors);
+        header("Location: edit_error.php?message=" . urlencode($message));
+        exit();
+    }
 
     // 画像ファイルを処理
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {

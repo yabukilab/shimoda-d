@@ -1,6 +1,8 @@
 <?php
-// リダイレクト先URLをクエリパラメータから取得
-$redirect_url = isset($_GET['redirect']) ? $_GET['redirect'] : 'index.php';
+session_start();
+
+// セッション変数 nowPage を取得する
+$nowPage = $_SESSION['nowPage'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -8,7 +10,7 @@ $redirect_url = isset($_GET['redirect']) ? $_GET['redirect'] : 'index.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>エラー</title>
-    <meta http-equiv="refresh" content="3;url=<?php echo htmlspecialchars($redirect_url); ?>">
+    <meta http-equiv="refresh" content="3;url=<?php echo htmlspecialchars($nowPage); ?>">
     <style>
         body {
             font-family: 'Arial', sans-serif;
