@@ -42,6 +42,7 @@
         .form-container form label {
             margin-top: 10px;
             font-size: 16px;
+            font-weight: bold;
         }
         .form-container form input[type="text"],
         .form-container form input[type="file"],
