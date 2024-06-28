@@ -48,6 +48,32 @@
             line-height: 1.6;
             margin-bottom: 20px;
         }
+        .introduction {
+            font-family: 'Georgia', serif;
+            color: #444;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            border-radius: 5px;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .comments {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .comments p {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive; /* Example of a more interesting font */
+        }
         .form-container {
             margin-top: 20px;
             text-align: left;
@@ -115,10 +141,11 @@
             echo "<img src='data:image/jpeg;base64,".base64_encode($row['image'])."' alt='Game Image'>";  // MEDIUMBLOBから画像を表示
             echo "<p>評価点: ".$row['rating']."</p>";
             echo "<p>追加日: ".$row['added_date']."</p>";
-            echo "<p>".$row['introduction']."</p>";
+            echo "<div class='introduction'>".$row['introduction']."</div>";
 
             // コメント一覧を表示
             echo "<h2>コメント</h2>";
+            echo "<div class='comments'>";
             $sql_comments = "SELECT * FROM comments WHERE game_id = :game_id ORDER BY added_date DESC";
             $stmt_comments = $db->prepare($sql_comments);
             $stmt_comments->bindParam(':game_id', $game_id);
@@ -131,6 +158,7 @@
             } else {
                 echo "<p>コメントはありません</p>";
             }
+            echo "</div>";
 
             // コメント追加フォーム
             echo "<div class='form-container'>";
