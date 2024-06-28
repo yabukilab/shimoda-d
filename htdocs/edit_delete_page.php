@@ -52,6 +52,10 @@
             max-width: 400px;
             box-sizing: border-box;
         }
+        .container form label {
+            font-weight: bold;
+            border: 2px solid #333;
+        }
         .container form input[type="submit"],
         .container form input[type="button"] {
             background-color: #007bff;
