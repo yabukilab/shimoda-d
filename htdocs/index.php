@@ -21,7 +21,7 @@ if ($result->rowCount() > 0) {
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #1e3c72, #2a5298, #1d976c, #93f9b9);
+            background: linear-gradient(to bottom, #e0ffe0, #004d00);
             margin: 0;
             padding: 20px;
             color: #333;
