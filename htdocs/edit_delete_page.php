@@ -93,13 +93,12 @@
 
         // URLパラメータからゲームIDを取得
         if (!isset($_POST['id']) || !isset($_POST['user_code']) || trim($_POST['user_code']) == '') {
-            $message = "";
             if (!isset($_POST['id'])) {
                 $message = "ゲームIDが設定されていません。";
             } elseif (!isset($_POST['user_code']) || trim($_POST['user_code']) == '') {
                 $message = "ユーザーコードが入力されていません。";
             }
-            header("Location: edit_error.php?message=" . urlencode($message) . "&id=" . urlencode($_POST['id']) . "&user_code=" . urlencode($_POST['user_code']));
+            header("Location: edit_error.php?message=" . urlencode($message));
             exit();
         }
 
