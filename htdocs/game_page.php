@@ -48,18 +48,15 @@
             line-height: 1.6;
             margin-bottom: 20px;
         }
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+        }
         .introduction-section {
             margin-top: 20px;
             text-align: left;
-        }
-        .introduction-section h2 {
-            font-size: 24px;
-            color: #333;
-            padding-left: 10px;
-            display: inline-block;
-            margin-bottom: 10px;
-            text-align: center;
-            width: 100%;
         }
         .introduction {
             font-family: 'Georgia', serif;
@@ -157,12 +154,12 @@
 
             // 紹介文セクション
             echo "<div class='introduction-section'>";
-            echo "<h2>紹介文</h2>";
+            echo "<h2 class='section-title'>紹介文</h2>";
             echo "<div class='introduction'>".$row['introduction']."</div>";
             echo "</div>";
 
             // コメント一覧を表示
-            echo "<h2>コメント</h2>";
+            echo "<h2 class='section-title'>コメント</h2>";
             echo "<div class='comments'>";
             $sql_comments = "SELECT * FROM comments WHERE game_id = :game_id ORDER BY added_date DESC";
             $stmt_comments = $db->prepare($sql_comments);
