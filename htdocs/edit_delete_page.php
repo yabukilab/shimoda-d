@@ -50,11 +50,6 @@
         exit();
     }
 
-    // エラーメッセージの表示
-    if (isset($_GET['message'])) {
-        echo "<p style='color:red;'>" . nl2br(htmlspecialchars(urldecode($_GET['message']))) . "</p>";
-    }
-
     // ゲームが見つかった場合、フォームを表示
     echo "<form action='edit_delete_process.php' method='post' enctype='multipart/form-data'>";
     echo "ゲームタイトル: <input type='text' name='title' value='".$row['title']."'><br>";
