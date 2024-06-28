@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+// セッション変数 nowPage を取得する
+$nowPage = $_SESSION['nowPage'] ?? '';
+?>
 <!DOCTYPE html> 
 <html> 
     <head>     
