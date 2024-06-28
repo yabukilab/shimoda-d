@@ -55,16 +55,18 @@
         .introduction-section h2 {
             font-size: 24px;
             color: #333;
-            border-left: 4px solid #007bff;
             padding-left: 10px;
             display: inline-block;
             margin-bottom: 10px;
+            text-align: center;
+            width: 100%;
         }
         .introduction {
             font-family: 'Georgia', serif;
             color: #444;
             background-color: #f9f9f9;
             padding: 15px;
+            border: 1px solid #333; /* 黒い枠線を追加 */
             border-radius: 5px;
             line-height: 1.8;
             text-align: left;
@@ -211,4 +213,3 @@
     </div>
 </body>
 </html>
-
