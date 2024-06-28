@@ -48,6 +48,17 @@
             line-height: 1.6;
             margin-bottom: 20px;
         }
+        .introduction {
+            font-family: 'Georgia', serif;
+            color: #444;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            border-radius: 5px;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 20px;
+        }
         .comments {
             margin-top: 20px;
             text-align: left;
@@ -130,7 +141,7 @@
             echo "<img src='data:image/jpeg;base64,".base64_encode($row['image'])."' alt='Game Image'>";  // MEDIUMBLOBから画像を表示
             echo "<p>評価点: ".$row['rating']."</p>";
             echo "<p>追加日: ".$row['added_date']."</p>";
-            echo "<p>".$row['introduction']."</p>";
+            echo "<div class='introduction'>".$row['introduction']."</div>";
 
             // コメント一覧を表示
             echo "<h2>コメント</h2>";
