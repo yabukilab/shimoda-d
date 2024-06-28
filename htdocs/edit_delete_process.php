@@ -1,5 +1,4 @@
 <?php
-session_start();
 // db.phpをインクルード
 require 'db.php';
 
@@ -12,14 +11,14 @@ if ($action == 'edit') {
     $new_title = isset($_POST['title']) ? trim($_POST['title']) : '';
     $new_rating = isset($_POST['rating']) ? $_POST['rating'] : 0;
     $new_introduction = isset($_POST['introduction']) ? trim($_POST['introduction']) : '';
-
+    
     $errors = array();
 
     // タイトルのチェック
     if (empty($new_title)) {
         $errors[] = "ゲームタイトルが入力されていません。";
     }
-
+    
     // 紹介文のチェック
     if (empty($new_introduction)) {
         $errors[] = "紹介文が入力されていません。";
@@ -29,8 +28,8 @@ if ($action == 'edit') {
 
     // エラーがある場合は処理を中断
     if (!empty($errors)) {
-        $_SESSION['errors'] = $errors;
-        header("Location: edit_delete_page.php");
+        $message = implode("\n", $errors);
+        header("Location: edit_error.php?message=" . urlencode($message));
         exit();
     }
 
@@ -44,14 +43,14 @@ if ($action == 'edit') {
         $file_parts = pathinfo($file_name);
         $file_ext = strtolower($file_parts['extension']);
         $extensions = array("jpeg", "jpg", "png");
-
+        
         if (in_array($file_ext, $extensions) === false) {
             $file_errors[] = "拡張子が許可されていません。JPEGまたはPNGファイルを選択してください。";
         }
-
+        
         if (!empty($file_errors)) {
-            $_SESSION['errors'] = $file_errors;
-            header("Location: edit_delete_page.php");
+            $message = implode("\n", $file_errors);
+            header("Location: edit_error.php?message=" . urlencode($message));
             exit();
         } else {
             $new_image = file_get_contents($file_tmp);
@@ -74,7 +73,7 @@ if ($action == 'edit') {
     $stmt_update->bindParam(':new_rating', $new_rating, PDO::PARAM_INT);
     $stmt_update->bindParam(':new_introduction', $new_introduction, PDO::PARAM_STR);
     $stmt_update->bindParam(':game_id', $game_id, PDO::PARAM_INT);
-
+    
     if ($stmt_update->execute()) {
         $message = "ゲームが編集されました";
     } else {
@@ -86,13 +85,13 @@ if ($action == 'edit') {
     $sql_delete_comments = "DELETE FROM comments WHERE game_id=:game_id";
     $stmt_delete_comments = $db->prepare($sql_delete_comments);
     $stmt_delete_comments->bindParam(':game_id', $game_id, PDO::PARAM_INT);
-
+    
     if ($stmt_delete_comments->execute()) {
         // 次に、ゲームを削除
         $sql_delete_game = "DELETE FROM games WHERE id=:game_id";
         $stmt_delete_game = $db->prepare($sql_delete_game);
         $stmt_delete_game->bindParam(':game_id', $game_id, PDO::PARAM_INT);
-
+        
         if ($stmt_delete_game->execute()) {
             $message = "ゲームが削除されました";
         } else {
