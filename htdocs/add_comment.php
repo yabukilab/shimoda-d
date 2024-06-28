@@ -56,6 +56,7 @@ $db = null;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
             border: 2px solid #00796b;
+            position: relative;
         }
         .message {
             font-size: 18px;
@@ -66,11 +67,21 @@ $db = null;
             color: #00796b;
             margin-top: 10px;
         }
+        .checkmark {
+            display: block;
+            margin: 20px auto 0;
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <p class="message"><?php echo nl2br(htmlspecialchars($message)); ?></p>
+        <svg class="checkmark" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="#4caf50"/>
+            <path fill="none" stroke="#ffffff" stroke-width="2" d="M6 12l4 4l8 -8"/>
+        </svg>
     </div>
 </body>
 </html>
