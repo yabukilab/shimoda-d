@@ -1,8 +1,3 @@
-<?php
-session_start();
-$_SESSION['previous_page'] = $_SERVER['HTTP_REFERER'];
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -61,17 +56,21 @@ $_SESSION['previous_page'] = $_SERVER['HTTP_REFERER'];
             display: flex;
             flex-direction: column;
         }
-        .form-container form label,
+        .form-container form label {
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
         .form-container form input[type="text"],
         .form-container form textarea,
         .form-container form input[type="submit"] {
-            margin-bottom: 10px;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
             box-sizing: border-box;
+            margin-bottom: 10px;
         }
         .form-container form input[type="submit"] {
             background-color: #007bff;
@@ -168,3 +167,4 @@ $_SESSION['previous_page'] = $_SERVER['HTTP_REFERER'];
     </div>
 </body>
 </html>
+
