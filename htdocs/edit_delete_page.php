@@ -17,19 +17,19 @@
     // db.phpをインクルード
     require 'db.php';
 
-    // URLパラメータからゲームIDとユーザーコードを取得
-    if (!isset($_GET['game_id']) || !isset($_GET['user_code']) || trim($_GET['user_code']) == '') {
-        if (!isset($_GET['game_id'])) {
+    // URLパラメータからゲームIDを取得
+    if (!isset($_POST['id']) || !isset($_POST['user_code']) || trim($_POST['user_code']) == '') {
+        if (!isset($_POST['id'])) {
             $message = "ゲームIDが設定されていません。";
-        } elseif (!isset($_GET['user_code']) || trim($_GET['user_code']) == '') {
+        } elseif (!isset($_POST['user_code']) || trim($_POST['user_code']) == '') {
             $message = "ユーザーコードが入力されていません。";
         }
         header("Location: edit_error.php?message=" . urlencode($message));
         exit();
     }
 
-    $game_id = $_GET['game_id'];
-    $user_code = $_GET['user_code'];
+    $game_id = $_POST['id'];
+    $user_code = $_POST['user_code'];
 
     $sql = "SELECT * FROM games WHERE id = :game_id";
     $stmt = $db->prepare($sql);
