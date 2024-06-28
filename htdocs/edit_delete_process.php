@@ -29,7 +29,7 @@ if ($action == 'edit') {
     // エラーがある場合は処理を中断
     if (!empty($errors)) {
         $message = implode("\n", $errors);
-        header("Location: edit_error.php?message=" . urlencode($message));
+        header("Location: edit_delete_page.php?game_id=$game_id&message=" . urlencode($message));
         exit();
     }
 
@@ -50,7 +50,7 @@ if ($action == 'edit') {
         
         if (!empty($file_errors)) {
             $message = implode("\n", $file_errors);
-            header("Location: edit_error.php?message=" . urlencode($message));
+            header("Location: edit_delete_page.php?game_id=$game_id&message=" . urlencode($message));
             exit();
         } else {
             $new_image = file_get_contents($file_tmp);
