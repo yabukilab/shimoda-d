@@ -7,11 +7,11 @@ $comment = $_POST['comment'];
 $user_name = ($_POST['user_name'] != '') ? $_POST['user_name'] : '名無し'; // ユーザー名が入力されていない場合は「名無し」とする
 
 $message = "";
+$success = false;
 
 // コメントが空の場合はエラーメッセージを設定
 if (trim($comment) == '') {
     $message = "コメントが入力されていません\n3秒後にトップページにリダイレクトします。";
-    header("refresh:3;url=index.php");
 } else {
     // コメントをデータベースに追加するSQLクエリ
     $sql = "INSERT INTO comments (game_id, comment, user_name) VALUES (:game_id, :comment, :user_name)";
@@ -23,12 +23,14 @@ if (trim($comment) == '') {
     try {
         $stmt->execute();
         $message = "コメントが追加されました";
-        header("refresh:3;url=index.php");
+        $success = true;
     } catch(PDOException $e) {
         $message = "エラー: " . $e->getMessage();
-        header("refresh:3;url=index.php");
     }
 }
+
+// 3秒後にリダイレクト
+header("refresh:3;url=index.php");
 
 // 接続を閉じる
 $db = null;
@@ -67,7 +69,7 @@ $db = null;
             color: #00796b;
             margin-top: 10px;
         }
-        .checkmark {
+        .checkmark, .crossmark {
             display: block;
             margin: 20px auto 0;
             width: 24px;
@@ -78,10 +80,17 @@ $db = null;
 <body>
     <div class="container">
         <p class="message"><?php echo nl2br(htmlspecialchars($message)); ?></p>
+        <?php if ($success): ?>
         <svg class="checkmark" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" fill="#4caf50"/>
             <path fill="none" stroke="#ffffff" stroke-width="2" d="M6 12l4 4l8 -8"/>
         </svg>
+        <?php else: ?>
+        <svg class="crossmark" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="#f44336"/>
+            <path fill="none" stroke="#ffffff" stroke-width="2" d="M6 6l12 12M6 18L18 6"/>
+        </svg>
+        <?php endif; ?>
     </div>
 </body>
 </html>
