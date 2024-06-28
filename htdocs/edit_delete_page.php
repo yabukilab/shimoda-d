@@ -145,6 +145,7 @@ edit_delete_page.php
         echo "<input type='hidden' name='game_id' value='".$game_id."'>";
         echo "<input type='hidden' name='action' value='delete'>"; // 削除アクション
         echo "<input type='button' value='削除' onclick='confirmDelete()'>";
+        echo "<input type='hidden' name='redirect_url' value='".$_SERVER['REQUEST_URI']."'>";
         echo "</form>";
 
         // データベース接続を閉じる
