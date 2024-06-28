@@ -48,12 +48,23 @@
             line-height: 1.6;
             margin-bottom: 20px;
         }
+        .introduction-section {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .introduction-section h2 {
+            font-size: 24px;
+            color: #333;
+            border-left: 4px solid #007bff;
+            padding-left: 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
         .introduction {
             font-family: 'Georgia', serif;
             color: #444;
             background-color: #f9f9f9;
             padding: 15px;
-            border-left: 4px solid #007bff;
             border-radius: 5px;
             line-height: 1.8;
             text-align: left;
@@ -72,7 +83,7 @@
             border-left: 4px solid #007bff;
             margin-bottom: 10px;
             border-radius: 5px;
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive; /* Example of a more interesting font */
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
         }
         .form-container {
             margin-top: 20px;
@@ -141,7 +152,12 @@
             echo "<img src='data:image/jpeg;base64,".base64_encode($row['image'])."' alt='Game Image'>";  // MEDIUMBLOBから画像を表示
             echo "<p>評価点: ".$row['rating']."</p>";
             echo "<p>追加日: ".$row['added_date']."</p>";
+
+            // 紹介文セクション
+            echo "<div class='introduction-section'>";
+            echo "<h2>紹介文</h2>";
             echo "<div class='introduction'>".$row['introduction']."</div>";
+            echo "</div>";
 
             // コメント一覧を表示
             echo "<h2>コメント</h2>";
@@ -195,4 +211,3 @@
     </div>
 </body>
 </html>
-
