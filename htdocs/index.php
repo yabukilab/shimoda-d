@@ -1,27 +1,16 @@
 <?php
-// データベース接続情報
-$servername = "localhost";
-$dbname = "game_database";
-
-// 接続確認
-$conn = new mysqli($servername, "root", "", $dbname);
-if ($conn->connect_error) {
-    die("データベースに接続できませんでした: " . $conn->connect_error);
-}
+require 'db.php';
 
 // 最新のゲームを取得するSQLクエリ
 $sql = "SELECT id, title, introduction FROM games ORDER BY id DESC LIMIT 3";
-$result = $conn->query($sql);
+$result = $db->query($sql);
 $latest_games = [];
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+if ($result->rowCount() > 0) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $latest_games[] = $row;
     }
 }
-
-// 接続を閉じる
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -159,9 +148,9 @@ $conn->close();
     <div class="latest-games">
         <?php foreach ($latest_games as $game): ?>
             <div class="latest-game-card">
-                <h3><?php echo htmlspecialchars($game['title']); ?></h3>
-                <p><?php echo htmlspecialchars($game['introduction']); ?></p>
-                <a href="game_page.php?id=<?php echo $game['id']; ?>">詳細を見る</a>
+                <h3><?php echo h($game['title']); ?></h3>
+                <p><?php echo h($game['introduction']); ?></p>
+                <a href="game_page.php?id=<?php echo h($game['id']); ?>">詳細を見る</a>
             </div>
         <?php endforeach; ?>
     </div>

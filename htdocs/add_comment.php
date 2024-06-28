@@ -1,14 +1,5 @@
 <?php
-//test
-// データベース接続情報
-$servername = "localhost";
-$dbname = "game_database";
-
-// 接続確認
-$conn = new mysqli($servername, "root", "", $dbname);
-if ($conn->connect_error) {
-    die("データベースに接続できませんでした: " . $conn->connect_error);
-}
+require 'db.php';
 
 // フォームからのデータを取得
 $game_id = $_POST['id'];
@@ -17,18 +8,28 @@ $user_name = ($_POST['user_name'] != '') ? $_POST['user_name'] : '名無し'; //
 
 $message = "";
 
-// コメントをデータベースに追加するSQLクエリ
-$sql = "INSERT INTO comments (game_id, comment, user_name) VALUES ($game_id, '$comment', '$user_name')";
-
-if ($conn->query($sql) === TRUE) {
-    $message = "コメントが追加されました";
-    header("refresh:3;url=index.php");
+// コメントが空の場合はエラーメッセージを設定
+if (trim($comment) == '') {
+    $message = "コメントが入力されていません";
 } else {
-    $message = "エラー: " . $sql . "<br>" . $conn->error;
+    // コメントをデータベースに追加するSQLクエリ
+    $sql = "INSERT INTO comments (game_id, comment, user_name) VALUES (:game_id, :comment, :user_name)";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':game_id', $game_id);
+    $stmt->bindParam(':comment', $comment);
+    $stmt->bindParam(':user_name', $user_name);
+
+    try {
+        $stmt->execute();
+        $message = "コメントが追加されました";
+        header("refresh:3;url=index.php");
+    } catch(PDOException $e) {
+        $message = "エラー: " . $e->getMessage();
+    }
 }
 
 // 接続を閉じる
-$conn->close();
+$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -68,7 +69,9 @@ $conn->close();
 <body>
     <div class="container">
         <p class="message"><?php echo $message; ?></p>
-        <p class="redirect">3秒後にトップページにリダイレクトします。</p>
+        <?php if ($message === "コメントが追加されました"): ?>
+            <p class="redirect">3秒後にトップページにリダイレクトします。</p>
+        <?php endif; ?>
     </div>
 </body>
 </html>

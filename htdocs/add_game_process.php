@@ -1,98 +1,79 @@
+
 <?php
-// データベース接続情報
-$servername = "localhost";
-$dbname = "game_database";
+// db.phpをインクルード
+require 'db.php';
 
 // フォームからのデータを取得
-$title = $_POST['title'];
-$rating = $_POST['rating'];
-$introduction = $_POST['introduction'];
-$user_code = $_POST['user_code'];
+$title = isset($_POST['title']) ? trim($_POST['title']) : '';
+$rating = isset($_POST['rating']) ? trim($_POST['rating']) : '';
+$introduction = isset($_POST['introduction']) ? trim($_POST['introduction']) : '';
+$user_code = isset($_POST['user_code']) ? trim($_POST['user_code']) : '';
 
-// 画像ファイルを処理
-if(isset($_FILES['image'])){
-    $errors= array();
-    $file_name = $_FILES['image']['name'];
-    $file_size = $_FILES['image']['size'];
-    $file_tmp = $_FILES['image']['tmp_name'];
-    $file_type = $_FILES['image']['type'];
-    $file_parts = explode('.', $_FILES['image']['name']);
-    $file_ext = strtolower(end($file_parts));
+// エラーメッセージを保持する配列
+$errors = array();
 
-    $extensions= array("jpeg","jpg","png");
-    
-    if(in_array($file_ext,$extensions)=== false){
-        $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-    }
-    
-    if(empty($errors)==true){
-        move_uploaded_file($file_tmp,"images/".$file_name);
-        $image = "images/".$file_name;
-    }else{
-        print_r($errors);
-    }
+// ゲームタイトルのバリデーション
+if (empty($title)) {
+    $errors[] = "ゲームタイトルが入力されていません。";
 }
 
-// 接続確認
-$conn = new mysqli($servername, "root", "", $dbname);
-if ($conn->connect_error) {
-    die("データベースに接続できませんでした: " . $conn->connect_error);
-}
-
-$message = "";
-
-// ゲームをデータベースに追加するSQLクエリ
-$sql = "INSERT INTO games (title, image, rating, introduction, user_code) VALUES ('$title', '$image', $rating, '$introduction', '$user_code')";
-
-if ($conn->query($sql) === TRUE) {
-    $message = "新しいゲームが追加されました";
-    header("refresh:3;url=index.php");
+// 画像ファイルのバリデーション
+if (!isset($_FILES['image']) || $_FILES['image']['error'] != UPLOAD_ERR_OK) {
+    $errors[] = "ファイルが選択されていません。";
 } else {
-    $message = "エラー: " . $sql . "<br>" . $conn->error;
+    $file_tmp = $_FILES['image']['tmp_name'];
+    $image = file_get_contents($file_tmp);
+}
+
+// 評価点のバリデーション
+if (empty($rating)) {
+    $errors[] = "評価点が入力されていません。";
+}
+
+// 紹介文のバリデーション
+if (empty($introduction)) {
+    $errors[] = "紹介文が記入されていません。";
+} elseif (strlen($introduction) > 400) {
+    $errors[] = "紹介文は400文字以内で記入してください。";
+}
+
+// ユーザーコードのバリデーション
+if (empty($user_code)) {
+    $errors[] = "ユーザーコードを入力してください。";
+} elseif (!preg_match('/^[a-zA-Z0-9]{8}$/', $user_code)) {
+    $errors[] = "ユーザーコードは8桁の半角アルファベット及び半角数字の組み合わせで入力してください。";
+}
+
+// エラーがある場合は処理を中断
+if (!empty($errors)) {
+    $message = implode("\n", $errors);
+    header("Location: add_game_error.php?message=" . urlencode($message));
+    exit();
+}
+
+try {
+    // ゲームをデータベースに追加するSQLクエリ
+    $sql = "INSERT INTO games (title, image, rating, introduction, user_code) VALUES (:title, :image, :rating, :introduction, :user_code)";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
+    $stmt->bindParam(':rating', $rating);
+    $stmt->bindParam(':introduction', $introduction);
+    $stmt->bindParam(':user_code', $user_code);
+
+    if ($stmt->execute()) {
+        echo "新しいゲームが追加されました<br>3秒後にトップページにリダイレクトします。";
+        header("refresh:3;url=index.php");
+    } else {
+        throw new Exception("データベースに追加中にエラーが発生しました: " . $stmt->errorInfo()[2]);
+    }
+
+} catch (Exception $e) {
+    echo "エラー: " . $e->getMessage();
+    echo "<br>3秒後に追加ページに戻ります。";
+    header("refresh:3;url=add_game.php");
 }
 
 // 接続を閉じる
-$conn->close();
+$db = null;
 ?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>リダイレクト中</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e0f7fa;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            border: 2px solid #00796b;
-        }
-        .message {
-            font-size: 18px;
-            color: #004d40;
-        }
-        .redirect {
-            font-size: 16px;
-            color: #00796b;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <p class="message"><?php echo $message; ?></p>
-        <p class="redirect">3秒後にトップページにリダイレクトします。</p>
-    </div>
-</body>
-</html>
