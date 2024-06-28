@@ -12,6 +12,5 @@
             echo nl2br(htmlspecialchars($message)) . "<br>3秒後にトップページにリダイレクトします。";
         }
     ?></p>
-    <a href="index.php">トップページに戻る</a>
 </body>
 </html>
