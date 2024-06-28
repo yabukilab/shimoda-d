@@ -21,7 +21,7 @@ if ($result->rowCount() > 0) {
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298, #1d976c, #93f9b9);
             margin: 0;
             padding: 20px;
             color: #333;
@@ -148,9 +148,9 @@ if ($result->rowCount() > 0) {
     <div class="latest-games">
         <?php foreach ($latest_games as $game): ?>
             <div class="latest-game-card">
-                <h3><?php echo h($game['title']); ?></h3>
-                <p><?php echo h($game['introduction']); ?></p>
-                <a href="game_page.php?id=<?php echo h($game['id']); ?>">詳細を見る</a>
+                <h3><?php echo htmlspecialchars($game['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                <p><?php echo htmlspecialchars($game['introduction'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <a href="game_page.php?id=<?php echo htmlspecialchars($game['id'], ENT_QUOTES, 'UTF-8'); ?>">詳細を見る</a>
             </div>
         <?php endforeach; ?>
     </div>
