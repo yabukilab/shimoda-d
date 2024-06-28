@@ -2,6 +2,13 @@
 <html>
 <head>
     <title>編集・削除ページ</title>
+    <script type="text/javascript">
+        function confirmDelete() {
+            if (confirm("本当に削除しますか？")) {
+                document.getElementById("deleteForm").submit();
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>編集・削除ページ</h1>
@@ -54,10 +61,10 @@
     echo "<input type='submit' name='submit' value='編集'>";
     echo "</form>";
     echo "<br>"; // フォーム間のスペース
-    echo "<form action='edit_delete_process.php' method='post'>";
+    echo "<form id='deleteForm' action='edit_delete_process.php' method='post'>";
     echo "<input type='hidden' name='game_id' value='".$game_id."'>";
     echo "<input type='hidden' name='action' value='delete'>"; // 削除アクション
-    echo "<input type='submit' name='submit' value='削除'>";
+    echo "<input type='button' value='削除' onclick='confirmDelete()'>";
     echo "</form>";
 
     // データベース接続を閉じる
