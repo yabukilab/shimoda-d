@@ -145,6 +145,7 @@ if ($result->rowCount() > 0) {
             <a href="game_list.php">詳細を見る</a>
         </div>
     </div>
+    /*
     <div class="latest-games">
         <?php foreach ($latest_games as $game): ?>
             <div class="latest-game-card">
@@ -154,6 +155,7 @@ if ($result->rowCount() > 0) {
             </div>
         <?php endforeach; ?>
     </div>
+    */
     <div class="footer">
         &copy; 2024 ゲーム紹介サイト. All rights reserved.
     </div>
