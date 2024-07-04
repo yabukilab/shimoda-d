@@ -22,7 +22,7 @@ if (trim($comment) == '') {
 
     try {
         $stmt->execute();
-        $message = "コメントが追加されました\n3秒後にトップページにリダイレクトします。";
+        $message = "コメントが追加されました。\n3秒後にトップページにリダイレクトします。";
         $success = true;
     } catch(PDOException $e) {
         $message = "エラー: " . $e->getMessage();

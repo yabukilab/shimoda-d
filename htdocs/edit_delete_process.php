@@ -75,7 +75,7 @@ if ($action == 'edit') {
     $stmt_update->bindParam(':game_id', $game_id, PDO::PARAM_INT);
     
     if ($stmt_update->execute()) {
-        $message = "ゲームが編集されました";
+        $message = "ゲームが編集されました。\n3秒後にトップページにリダイレクトします。";
     } else {
         $message = "編集エラー: " . $stmt_update->errorInfo()[2];
     }
@@ -93,7 +93,7 @@ if ($action == 'edit') {
         $stmt_delete_game->bindParam(':game_id', $game_id, PDO::PARAM_INT);
         
         if ($stmt_delete_game->execute()) {
-            $message = "ゲームが削除されました";
+            $message = "ゲームが削除されました。\n3秒後にトップページにリダイレクトします。";
         } else {
             $message = "ゲームの削除エラー: " . $stmt_delete_game->errorInfo()[2];
         }

@@ -120,7 +120,7 @@ $db = null;
 <body>
     <div class="container">
         <p class="message"><?php echo nl2br(htmlspecialchars($message)); ?></p>
-        <?php if (strpos($message, '新しいゲームが追加されました') !== false) : ?>
+        <?php if (strpos($message, '新しいゲームが追加されました。') !== false) : ?>
             <svg class="checkmark" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" fill="#4caf50"/>
                 <path fill="none" stroke="#ffffff" stroke-width="2" d="M6 12l4 4l8 -8"/>
@@ -131,7 +131,7 @@ $db = null;
                 <path fill="none" stroke="#ffffff" stroke-width="2" d="M6 6l12 12M6 18L18 6"/>
             </svg>
         <?php endif; ?>
-        <p class="redirect">3秒後にリダイレクトします。</p>
+        <p class="redirect">3秒後にトップページにリダイレクトします。</p>
     </div>
 </body>
 </html>
