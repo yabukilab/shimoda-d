@@ -50,33 +50,28 @@ if (empty($user_code)) {
     $errors[] = "ユーザーコードは8桁の半角アルファベット及び半角数字の組み合わせで入力してください。";
 }
 
-// エラーがある場合は処理を中断
+// エラーがある場合は処理を中断し、エラーメッセージを表示
 if (!empty($errors)) {
     $message = implode("\n", $errors);
-    header("Location: add_game_error.php?message=" . urlencode($message));
-    exit();
-}
+} else {
+    try {
+        // ゲームをデータベースに追加するSQLクエリ
+        $sql = "INSERT INTO games (title, image, rating, introduction, user_code) VALUES (:title, :image, :rating, :introduction, :user_code)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
+        $stmt->bindParam(':rating', $rating);
+        $stmt->bindParam(':introduction', $introduction);
+        $stmt->bindParam(':user_code', $user_code);
 
-try {
-    // ゲームをデータベースに追加するSQLクエリ
-    $sql = "INSERT INTO games (title, image, rating, introduction, user_code) VALUES (:title, :image, :rating, :introduction, :user_code)";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':title', $title);
-    $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
-    $stmt->bindParam(':rating', $rating);
-    $stmt->bindParam(':introduction', $introduction);
-    $stmt->bindParam(':user_code', $user_code);
-
-    if ($stmt->execute()) {
-        $message = "新しいゲームが追加されました";
-        header("refresh:3;url=index.php");
-    } else {
-        throw new Exception("データベースに追加中にエラーが発生しました: " . $stmt->errorInfo()[2]);
+        if ($stmt->execute()) {
+            $message = "新しいゲームが追加されました";
+        } else {
+            throw new Exception("データベースに追加中にエラーが発生しました: " . $stmt->errorInfo()[2]);
+        }
+    } catch (Exception $e) {
+        $message = "エラー: " . $e->getMessage();
     }
-
-} catch (Exception $e) {
-    $message = "エラー: " . $e->getMessage();
-    header("refresh:3;url=add_game.php");
 }
 
 // 接続を閉じる
@@ -123,11 +118,12 @@ $db = null;
             height: 24px;
         }
     </style>
+    <meta http-equiv="refresh" content="3;url=index.php">
 </head>
 <body>
     <div class="container">
         <p class="message"><?php echo nl2br(htmlspecialchars($message)); ?></p>
-        <?php if (strpos($message, '新しいゲームが追加されました。') !== false) : ?>
+        <?php if (strpos($message, '新しいゲームが追加されました') !== false) : ?>
             <svg class="checkmark" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" fill="#4caf50"/>
                 <path fill="none" stroke="#ffffff" stroke-width="2" d="M6 12l4 4l8 -8"/>
