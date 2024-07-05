@@ -14,7 +14,9 @@ $errors = array();
 // ゲームタイトルのバリデーション
 if (empty($title)) {
     $errors[] = "ゲームタイトルが入力されていません。";
-} 
+} elseif (strlen($title) > 255) {
+    $errors[] = "ゲームタイトルは255文字以内で入力してください。";
+}
 
 // 画像ファイルのバリデーション
 if (!isset($_FILES['image']) || $_FILES['image']['error'] != UPLOAD_ERR_OK) {
@@ -48,6 +50,8 @@ if (empty($user_code)) {
     $errors[] = "ユーザーコードを入力してください。";
 } elseif (!preg_match('/^[a-zA-Z0-9]{8}$/', $user_code)) {
     $errors[] = "ユーザーコードは8桁の半角アルファベット及び半角数字の組み合わせで入力してください。";
+} elseif (ctype_alpha($user_code) || ctype_digit($user_code)) {
+    $errors[] = "ユーザーコードはアルファベットと数字の両方を含める必要があります。";
 }
 
 // エラーがある場合は処理を中断し、エラーメッセージを表示
@@ -78,7 +82,6 @@ if (!empty($errors)) {
 $db = null;
 ?>
 
-<!-- HTMLの部分は変更なし -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -146,3 +149,4 @@ $db = null;
     </div>
 </body>
 </html>
+
