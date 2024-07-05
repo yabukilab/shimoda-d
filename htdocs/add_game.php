@@ -87,9 +87,9 @@
             <input type="file" name="image" id="image"><br>
             <label for="rating">評価点(10点満点):</label>
             <input type="number" name="rating" id="rating" min="0" max="10"><br>
-            <label for="introduction">紹介文:</label><br>
+            <label for="introduction">紹介文(400文字以内):</label><br>
             <textarea name="introduction" id="introduction" rows="4" cols="50"></textarea><br>
-            <label for="user_code">ユーザコード:</label>
+            <label for="user_code">ユーザコード(半角アルファベットと数字の組み合わせ8桁):</label>
             <input type="text" name="user_code" id="user_code"><br>
             <input type="submit" value="追加">
         </form>

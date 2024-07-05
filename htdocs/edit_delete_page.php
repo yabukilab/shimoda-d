@@ -132,7 +132,7 @@
         echo "<input type='file' name='image' id='image'><br>";
         echo "<label for='rating'>評価点(10点満点):</label>";
         echo "<input type='number' name='rating' id='rating' min='0' max='10' value='".$row['rating']."'><br>";
-        echo "<label for='introduction'>紹介文:</label>";
+        echo "<label for='introduction'>紹介文(400文字以内):</label>";
         echo "<textarea name='introduction' id='introduction' rows='4'>".$row['introduction']."</textarea><br>";
         echo "<input type='hidden' name='game_id' value='".$game_id."'>";
         echo "<input type='hidden' name='action' value='edit'>"; // 編集アクション
