@@ -4,13 +4,23 @@ require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'initialize_table') {
     try {
-        // テーブルを初期化するSQLクエリを実行
-        $db->exec("DELETE FROM games");
+        // トランザクションを開始
+        $db->beginTransaction();
+        
+        // コメントテーブルから削除
         $db->exec("DELETE FROM comments");
+
+        // ゲームテーブルから削除
+        $db->exec("DELETE FROM games");
+
+        // コミット
+        $db->commit();
 
         echo "テーブルの初期化が成功しました。";
 
     } catch (PDOException $e) {
+        // ロールバック
+        $db->rollBack();
         echo "エラー: " . htmlspecialchars($e->getMessage());
     }
 }
