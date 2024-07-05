@@ -21,7 +21,14 @@ if (!isset($_FILES['image']) || $_FILES['image']['error'] != UPLOAD_ERR_OK) {
     $errors[] = "ファイルが選択されていません。";
 } else {
     $file_tmp = $_FILES['image']['tmp_name'];
-    $image = file_get_contents($file_tmp);
+    $file_type = mime_content_type($file_tmp);
+
+    // ファイルタイプのチェック
+    if ($file_type !== 'image/jpeg' && $file_type !== 'image/png') {
+        $errors[] = "画像ファイルは.jpgまたは.png形式でなければなりません。";
+    } else {
+        $image = file_get_contents($file_tmp);
+    }
 }
 
 // 評価点のバリデーション
