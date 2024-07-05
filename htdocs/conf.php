@@ -2,6 +2,19 @@
 // db.phpをインクルード
 require 'db.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'initialize_table') {
+    try {
+        // テーブルを初期化するSQLクエリを実行
+        $db->exec("DELETE FROM games");
+        $db->exec("DELETE FROM comments");
+
+        echo "テーブルの初期化が成功しました。";
+
+    } catch (PDOException $e) {
+        echo "エラー: " . htmlspecialchars($e->getMessage());
+    }
+}
+
 try {
     // ゲームのデータを取得
     $game_sql = "SELECT * FROM games";
@@ -58,3 +71,22 @@ try {
 // 接続を閉じる
 $db = null;
 ?>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>テーブルの初期化</title>
+</head>
+<body>
+
+<!-- ここに既存のコンテンツ -->
+
+<!-- フォームを追加 -->
+<form method="post">
+    <input type="hidden" name="action" value="initialize_table">
+    <button type="submit">テーブルの初期化</button>
+</form>
+
+</body>
+</html>
