@@ -39,7 +39,7 @@ if (empty($rating)) {
 // 紹介文のバリデーション
 if (empty($introduction)) {
     $errors[] = "紹介文が記入されていません。";
-} elseif (strlen($introduction) > 400) {
+} elseif (strlen($introduction) > 401) {
     $errors[] = "紹介文は400文字以内で記入してください。";
 }
 
