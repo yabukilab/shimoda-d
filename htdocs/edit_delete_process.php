@@ -22,7 +22,7 @@ if ($action == 'edit') {
     // 紹介文のチェック
     if (empty($new_introduction)) {
         $errors[] = "紹介文が入力されていません。";
-    } elseif (strlen($new_introduction) > 400) {
+    } elseif (strlen($new_introduction) > 1200) {
         $errors[] = "紹介文が400文字を超えています。";
     }
 
