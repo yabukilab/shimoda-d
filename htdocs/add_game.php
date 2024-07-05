@@ -83,7 +83,7 @@
         <form action="add_game_process.php" method="post" enctype="multipart/form-data">
             <label for="title">ゲームタイトル:</label>
             <input type="text" name="title" id="title"><br>
-            <label for="image">画像:</label>
+            <label for="image">画像(jpgかpng):</label>
             <input type="file" name="image" id="image"><br>
             <label for="rating">評価点(10点満点):</label>
             <input type="number" name="rating" id="rating" min="0" max="10"><br>
