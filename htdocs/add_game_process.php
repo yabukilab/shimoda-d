@@ -102,9 +102,15 @@ $db = null;
             border: 2px solid #00796b;
             position: relative;
         }
+        .container.error {
+            border-color: #f44336;
+        }
         .message {
             font-size: 18px;
             color: #004d40;
+        }
+        .message.error {
+            color: #f44336;
         }
         .redirect {
             font-size: 16px;
@@ -121,8 +127,8 @@ $db = null;
     <meta http-equiv="refresh" content="3;url=index.php">
 </head>
 <body>
-    <div class="container">
-        <p class="message"><?php echo nl2br(htmlspecialchars($message)); ?></p>
+    <div class="container <?php echo (strpos($message, 'エラー') !== false) ? 'error' : ''; ?>">
+        <p class="message <?php echo (strpos($message, 'エラー') !== false) ? 'error' : ''; ?>"><?php echo nl2br(htmlspecialchars($message)); ?></p>
         <?php if (strpos($message, '新しいゲームが追加されました') !== false) : ?>
             <svg class="checkmark" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" fill="#4caf50"/>
