@@ -14,9 +14,7 @@ $errors = array();
 // ゲームタイトルのバリデーション
 if (empty($title)) {
     $errors[] = "ゲームタイトルが入力されていません。";
-} elseif (mb_strlen($title) > 255) {
-    $errors[] = "ゲームタイトルは255文字以内で入力してください。";
-}
+} 
 
 // 画像ファイルのバリデーション
 if (!isset($_FILES['image']) || $_FILES['image']['error'] != UPLOAD_ERR_OK) {
