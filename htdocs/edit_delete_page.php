@@ -126,7 +126,7 @@
 
         // ゲームが見つかった場合、フォームを表示
         echo "<form action='edit_delete_process.php' method='post' enctype='multipart/form-data'>";
-        echo "<label for='title'>ゲームタイトル:</label>";
+        echo "<label for='title'>ゲームタイトル(255文字以内):</label>";
         echo "<input type='text' name='title' id='title' value='".$row['title']."'><br>";
         echo "<label for='image'>画像(jpgかpng):</label>";
         echo "<input type='file' name='image' id='image'><br>";

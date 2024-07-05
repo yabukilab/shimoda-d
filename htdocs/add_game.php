@@ -81,7 +81,7 @@
     </div>
     <div class="form-container">
         <form action="add_game_process.php" method="post" enctype="multipart/form-data">
-            <label for="title">ゲームタイトル:</label>
+            <label for="title">ゲームタイトル(255文字以内):</label>
             <input type="text" name="title" id="title"><br>
             <label for="image">画像(jpgかpng):</label>
             <input type="file" name="image" id="image"><br>
