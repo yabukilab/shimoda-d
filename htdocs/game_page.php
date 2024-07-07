@@ -8,6 +8,7 @@ if (isset($_GET['id'])) {
 }
 echo json_encode($_SESSION);
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>

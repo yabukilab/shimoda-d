@@ -19,7 +19,7 @@ $success = false;
 
 // コメントが空の場合はエラーメッセージを設定
 if (trim($comment) == '') {
-    $message = "コメントが入力されていません\n3秒後にトップページにリダイレクトします。";
+    $message = "コメントが入力されていません\n3秒後に前ページにリダイレクトします。";
 } else {
     // コメントをデータベースに追加するSQLクエリ
     $sql = "INSERT INTO comments (game_id, comment, user_name) VALUES (:game_id, :comment, :user_name)";
@@ -30,7 +30,7 @@ if (trim($comment) == '') {
 
     try {
         $stmt->execute();
-        $message = "コメントが追加されました。\n3秒後にトップページにリダイレクトします。";
+        $message = "コメントが追加されました。\n3秒後に前ページにリダイレクトします。";
         $success = true;
     } catch(PDOException $e) {
         $message = "エラー: " . $e->getMessage();

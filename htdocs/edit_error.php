@@ -1,10 +1,18 @@
+<?php
+// セッションの開始
+session_start();
+
+// セッション変数の取得
+$id = isset($_SESSION['id']) ? $_SESSION['id'] : 'defaultID';
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>エラー</title>
-    <meta http-equiv="refresh" content="3;url=index.php">
+    <meta http-equiv="refresh" content="3;url=game_page.php?id=<?php echo $id; ?>">
     <style>
         body {
             font-family: 'Arial', sans-serif;
