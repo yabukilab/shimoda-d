@@ -77,8 +77,7 @@
         .footer-button {
             position: fixed;
             bottom: 20px; /* ボタンの位置調整 */
-            left: 50%;
-            transform: translateX(-50%);
+            right: 20px;
             background-color: #00796b;
             color: #ffffff;
             padding: 10px 20px;
