@@ -73,6 +73,22 @@
             font-size: 14px;
             color: #666;
         }
+        .footer-button {
+            position: fixed;
+            bottom: 20px; /* ボタンの位置調整 */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00796b;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .footer-button:hover {
+            background-color: #005a4d;
+        }
     </style>
 </head>
 <body>
@@ -94,6 +110,7 @@
             <input type="submit" value="追加">
         </form>
     </div>
+    <a href="index.php" class="footer-button">トップへ戻る</a>
     <div class="footer">
         &copy; 2024 ゲーム紹介サイト. All rights reserved.
     </div>
