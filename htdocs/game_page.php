@@ -1,3 +1,13 @@
+<?php
+// セッションの開始
+session_start();
+
+// セッション変数の設定
+if (isset($_GET['id'])) {
+    $_SESSION['id'] = $_GET['id'];
+}
+echo json_encode($_SESSION);
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -210,13 +220,3 @@
     </div>
 </body>
 </html>
-<?php
-// セッションの開始
-session_start();
-
-// セッション変数の設定
-if (isset($_GET['id'])) {
-    $_SESSION['id'] = $_GET['id'];
-}
-echo json_encode($_SESSION);
-?>
