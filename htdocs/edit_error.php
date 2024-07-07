@@ -58,7 +58,7 @@ $id = isset($_SESSION['id']) ? $_SESSION['id'] : 'defaultID';
                 echo nl2br(htmlspecialchars($message)) . "<br>";
             }
             ?>
-            <span class="redirect">3秒後にトップページに戻ります。</span>
+            <span class="redirect">3秒後に紹介ページにリダイレクトします。</span>
         </p>
         <svg class="cross" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" fill="#f44336"/>
