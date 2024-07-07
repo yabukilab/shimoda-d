@@ -113,6 +113,8 @@
     <div class="footer">
         &copy; 2024 ゲーム紹介サイト. All rights reserved.
     </div>
+    <div>
     <a href="index.php" class="footer-button">トップへ戻る</a>
+    </div>
 </body>
 </html>
