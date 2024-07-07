@@ -215,6 +215,6 @@
 session_start();
 
 // セッション変数の設定
-$_SESSION=$_GET['id'];
-
-?>
+if (isset($_GET['id'])) {
+    $_SESSION['id'] = $_GET['id'];
+}

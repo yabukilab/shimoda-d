@@ -2,9 +2,8 @@
 // セッションの開始
 session_start();
 
-// セッション変数の設定
-echo json_encode($_SESSION);;
-
+// セッション変数の取得
+$id = isset($_SESSION['id']) ? $_SESSION['id'] : 'defaultID';
 ?>
 
 <?php
@@ -39,7 +38,7 @@ if (trim($comment) == '') {
 }
 
 // 3秒後にリダイレクト
-header("refresh:3;url=game_page.php?id=$_SESSION");
+header("refresh:3;url=game_page.php?id=$id");
 
 
 // 接続を閉じる
