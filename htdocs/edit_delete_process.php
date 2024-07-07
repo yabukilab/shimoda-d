@@ -82,7 +82,26 @@ if ($action == 'edit') {
         $message = "編集エラー: " . $stmt_update->errorInfo()[2];
     }
 } elseif ($action == 'delete') {
-    $message = "ゲームが削除されました。\n3秒後にトップページにリダイレクトします。";
+    // 削除処理
+    // まず、関連するコメントを削除
+    $sql_delete_comments = "DELETE FROM comments WHERE game_id=:game_id";
+    $stmt_delete_comments = $db->prepare($sql_delete_comments);
+    $stmt_delete_comments->bindParam(':game_id', $game_id, PDO::PARAM_INT);
+    
+    if ($stmt_delete_comments->execute()) {
+        // 次に、ゲームを削除
+        $sql_delete_game = "DELETE FROM games WHERE id=:game_id";
+        $stmt_delete_game = $db->prepare($sql_delete_game);
+        $stmt_delete_game->bindParam(':game_id', $game_id, PDO::PARAM_INT);
+        
+        if ($stmt_delete_game->execute()) {
+            $message = "ゲームが削除されました。\n3秒後にトップページにリダイレクトします。";
+        } else {
+            $message = "ゲームの削除エラー: " . $stmt_delete_game->errorInfo()[2];
+        }
+    } else {
+        $message = "コメントの削除エラー: " . $stmt_delete_comments->errorInfo()[2];
+    }
 } else {
     $message = "無効なアクションです";
 }
@@ -94,8 +113,7 @@ $db = null;
 header("refresh:3;url=index.php");
 ?>
 
-<!DOCTYPE html>
-<!-- HTMLの部分は変更なし -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
