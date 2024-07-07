@@ -210,3 +210,11 @@
     </div>
 </body>
 </html>
+<?php
+// セッションの開始
+session_start();
+
+// セッション変数の設定
+$_SESSION=$_GET['id'];
+
+?>

@@ -1,4 +1,13 @@
 <?php
+// セッションの開始
+session_start();
+
+// セッション変数の設定
+echo $_SESSION;
+
+?>
+
+<?php
 require 'db.php';
 
 // フォームからのデータを取得
@@ -30,7 +39,8 @@ if (trim($comment) == '') {
 }
 
 // 3秒後にリダイレクト
-header("refresh:3;url=index.php");
+header("refresh:3;url=game_page.php?id=$_SESSION");
+
 
 // 接続を閉じる
 $db = null;
