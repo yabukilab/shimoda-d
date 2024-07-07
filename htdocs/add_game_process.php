@@ -57,25 +57,29 @@ if (empty($user_code)) {
 // エラーがある場合は処理を中断し、エラーメッセージを表示
 if (!empty($errors)) {
     $message = implode("\n", $errors);
-} else {
-    try {
-        // ゲームをデータベースに追加するSQLクエリ
-        $sql = "INSERT INTO games (title, image, rating, introduction, user_code) VALUES (:title, :image, :rating, :introduction, :user_code)";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
-        $stmt->bindParam(':rating', $rating);
-        $stmt->bindParam(':introduction', $introduction);
-        $stmt->bindParam(':user_code', $user_code);
+    // エラーが発生した場合、add_game.phpにリダイレクト
+    header("refresh:3;url=add_game.php?message=" . urlencode($message));
+    exit; // リダイレクト後にスクリプトを終了
+}
 
-        if ($stmt->execute()) {
-            $message = "新しいゲームが追加されました";
-        } else {
-            throw new Exception("データベースに追加中にエラーが発生しました: " . $stmt->errorInfo()[2]);
-        }
-    } catch (Exception $e) {
-        $message = "エラー: " . $e->getMessage();
+// エラーがない場合はデータベースにゲームを追加
+try {
+    // ゲームをデータベースに追加するSQLクエリ
+    $sql = "INSERT INTO games (title, image, rating, introduction, user_code) VALUES (:title, :image, :rating, :introduction, :user_code)";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
+    $stmt->bindParam(':rating', $rating);
+    $stmt->bindParam(':introduction', $introduction);
+    $stmt->bindParam(':user_code', $user_code);
+
+    if ($stmt->execute()) {
+        $message = "新しいゲームが追加されました";
+    } else {
+        throw new Exception("データベースに追加中にエラーが発生しました: " . $stmt->errorInfo()[2]);
     }
+} catch (Exception $e) {
+    $message = "エラー: " . $e->getMessage();
 }
 
 // 接続を閉じる
@@ -149,4 +153,3 @@ $db = null;
     </div>
 </body>
 </html>
-
