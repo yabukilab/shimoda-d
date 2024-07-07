@@ -110,9 +110,9 @@
             <input type="submit" value="追加">
         </form>
     </div>
-    <a href="index.php" class="footer-button">トップへ戻る</a>
     <div class="footer">
         &copy; 2024 ゲーム紹介サイト. All rights reserved.
     </div>
+    <a href="index.php" class="footer-button">トップへ戻る</a>
 </body>
 </html>
