@@ -82,7 +82,7 @@ if ($action == 'edit') {
         $message = "編集エラー: " . $stmt_update->errorInfo()[2];
     }
 } elseif ($action == 'delete') {
-    // 削除処理（変更なし）
+    $message = "ゲームが削除されました。\n3秒後にトップページにリダイレクトします。";
 } else {
     $message = "無効なアクションです";
 }
