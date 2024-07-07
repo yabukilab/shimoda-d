@@ -11,6 +11,7 @@
             margin: 0;
             padding: 20px;
             color: #333;
+            padding-bottom: 60px;
         }
         .header {
             text-align: center;
@@ -72,6 +73,21 @@
             margin-top: 40px;
             font-size: 14px;
             color: #666;
+        }
+        .footer-button {
+            position: fixed;
+            bottom: 20px; /* ボタンの位置調整 */
+            right: 20px;
+            background-color: #00796b;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .footer-button:hover {
+            background-color: #005a4d;
         }
     </style>
     <script type="text/javascript">
@@ -152,6 +168,9 @@
     </div>
     <div class="footer">
         &copy; 2024 ゲーム紹介サイト. All rights reserved.
+    </div>
+    <div>
+    <a href="index.php" class="footer-button">トップへ戻る</a>
     </div>
 </body>
 </html>
