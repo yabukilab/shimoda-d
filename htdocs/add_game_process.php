@@ -54,7 +54,7 @@ if (empty($user_code)) {
     $errors[] = "ユーザーコードはアルファベットと数字の両方を含める必要があります。";
 }
 
-// エラーがある場合は処理を中断し、エラーメッセージを設定
+// エラーがある場合は処理を中断し、エラーメッセージを表示
 if (!empty($errors)) {
     $message = implode("\n", $errors);
 } else {
@@ -129,23 +129,23 @@ $db = null;
             height: 24px;
         }
     </style>
-    <meta http-equiv="refresh" content="3;url=<?php echo (isset($message) && strpos($message, 'エラー') === false) ? 'index.php' : 'add_game.php'; ?>">
+    <meta http-equiv="refresh" content="3;url=index.php">
 </head>
 <body>
-    <div class="container <?php echo (isset($message) && strpos($message, 'エラー') !== false) ? 'error' : ''; ?>">
-        <p class="message <?php echo (isset($message) && strpos($message, 'エラー') !== false) ? 'error' : ''; ?>"><?php echo isset($message) ? nl2br(htmlspecialchars($message)) : ''; ?></p>
-        <?php if (isset($message) && strpos($message, '新しいゲームが追加されました') !== false) : ?>
+    <div class="container <?php echo (strpos($message, 'エラー') !== false) ? 'error' : ''; ?>">
+        <p class="message <?php echo (strpos($message, 'エラー') !== false) ? 'error' : ''; ?>"><?php echo nl2br(htmlspecialchars($message)); ?></p>
+        <?php if (strpos($message, '新しいゲームが追加されました') !== false) : ?>
             <svg class="checkmark" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" fill="#4caf50"/>
                 <path fill="none" stroke="#ffffff" stroke-width="2" d="M6 12l4 4l8 -8"/>
             </svg>
-        <?php elseif (isset($message) && strpos($message, 'エラー') !== false) : ?>
+        <?php elseif (strpos($message, 'エラー') !== false) : ?>
             <svg class="checkmark" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" fill="#f44336"/>
                 <path fill="none" stroke="#ffffff" stroke-width="2" d="M6 6l12 12M6 18L18 6"/>
             </svg>
         <?php endif; ?>
-        <p class="redirect">3秒後に<?php echo (isset($message) && strpos($message, 'エラー') === false) ? 'トップページ' : '再度ゲーム追加ページ'; ?>にリダイレクトします。</p>
+        <p class="redirect">3秒後にトップページにリダイレクトします。</p>
     </div>
 </body>
 </html>
