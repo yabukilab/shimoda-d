@@ -3,7 +3,7 @@
 session_start();
 
 // セッション変数の設定
-echo $_SESSION;
+echo json_encode($_SESSION);;
 
 ?>
 
