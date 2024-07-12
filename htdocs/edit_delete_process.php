@@ -17,9 +17,7 @@ if ($action == 'edit') {
     // タイトルのチェック
     if (empty($new_title)) {
         $errors[] = "ゲームタイトルが入力されていません。";
-    } elseif (strlen($title) > 255) {
-        $errors[] = "ゲームタイトルは255文字以内で入力してください。";
-    }
+    } 
     
     // 紹介文のチェック
     if (empty($new_introduction)) {
