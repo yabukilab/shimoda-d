@@ -1,6 +1,10 @@
 -- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
 --
+<<<<<<< HEAD
 -- Host: localhost    Database: study
+=======
+-- Host: localhost    Database: study5
+>>>>>>> 9fe6a26454ca65c390d4361c803ddb5358b4aaa1
 -- ------------------------------------------------------
 -- Server version	10.4.32-MariaDB
 
@@ -14,6 +18,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+<<<<<<< HEAD
 
 --
 -- Table structure for table `mst_product`
@@ -51,3 +56,5 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-06-12 13:47:26
+=======
+>>>>>>> 9fe6a26454ca65c390d4361c803ddb5358b4aaa1
