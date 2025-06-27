@@ -26,7 +26,7 @@ if (empty($student_id)) {
     }
 }
 
-echo '<a href="top.php" class="back-button return-button">トップに戻る</a>
+echo '<a href="index.php" class="back-button return-button">トップに戻る</a>
 </body>
 </html>';
 ?>
