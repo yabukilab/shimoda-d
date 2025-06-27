@@ -18,7 +18,7 @@ if (empty($student_id)) {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>予約キャンセルの確認</h1>
+  <h1>抽選キャンセルの確認</h1>
   <p class="confirm-message">学籍番号「<strong><?php echo htmlspecialchars($student_id); ?></strong>」の予約を本当にキャンセルしますか？</p>
 
   <h2>キャンセルしますか？</h2>

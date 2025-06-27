@@ -20,9 +20,9 @@ if (empty($student_id)) {
     $stmt->execute([$student_id]);
 
     if ($stmt->rowCount() > 0) {
-        echo '<p class="confirm-message">予約を正常にキャンセルしました。</p>';
+        echo '<p class="confirm-message">抽選を正常にキャンセルしました。</p>';
     } else {
-        echo '<p class="confirm-message">予約が見つかりませんでした。</p>';
+        echo '<p class="confirm-message">抽選が見つかりませんでした。</p>';
     }
 }
 
