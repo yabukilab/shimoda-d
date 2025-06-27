@@ -1,6 +1,15 @@
 
 <?php
 session_start();
+try {
+  $db = new PDO($dsn, $dbUser, $dbPass);
+  # プリペアドステートメントのエミュレーションを無効にする．
+  $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+  # エラー→例外
+  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+  echo "Can't connect to the database: " . h($e->getMessage());
+}
 require 'db.php';
 ?>
 
@@ -39,7 +48,7 @@ foreach ($timeSlots as $slot) {
 ?>
 </div>
 
-<form action="top.php" method="get">
+<form action="index.php" method="get">
     <button type="submit" class="back-button">戻る</button>
 </form>
 
