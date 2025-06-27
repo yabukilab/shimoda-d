@@ -46,7 +46,7 @@ try {
 <body>
 
 <div class="back-button">
-  <a href="time select.php">戻る</a>
+  <a href="time_select.php">戻る</a>
 </div>
 
 <h2>座席表 (時間帯: <?= htmlspecialchars($time_slot) ?>)</h2>
