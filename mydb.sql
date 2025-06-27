@@ -1,6 +1,10 @@
 -- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
 --
+<<<<<<< HEAD
+-- Host: localhost    Database: study
+=======
 -- Host: localhost    Database: study5
+>>>>>>> 9fe6a26454ca65c390d4361c803ddb5358b4aaa1
 -- ------------------------------------------------------
 -- Server version	10.4.32-MariaDB
 
@@ -29,7 +33,11 @@ CREATE TABLE `mst_product` (
   `price` int(11) NOT NULL,
   `comment` varchar(200) NOT NULL,
   PRIMARY KEY (`code`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+>>>>>>> 67d1bfa18933b5903692df386092811b448d09eb
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +46,11 @@ CREATE TABLE `mst_product` (
 
 LOCK TABLES `mst_product` WRITE;
 /*!40000 ALTER TABLE `mst_product` DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO `mst_product` VALUES (1,'パソコン',500,'速い'),(2,'スマホ',1000,'軽い');
+=======
+INSERT INTO `mst_product` VALUES (1,'パソコン',500,'速い'),(3,'スマホ',1000,'軽い'),(4,'タブレット',0,''),(5,'イチゴ',10000,''),(6,'mkio',10,'まきおです');
+>>>>>>> 67d1bfa18933b5903692df386092811b448d09eb
 /*!40000 ALTER TABLE `mst_product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,6 +63,10 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2025-06-12 13:47:46
+=======
+-- Dump completed on 2025-06-12 13:47:26
+>>>>>>> 67d1bfa18933b5903692df386092811b448d09eb
 =======
 >>>>>>> 9fe6a26454ca65c390d4361c803ddb5358b4aaa1
