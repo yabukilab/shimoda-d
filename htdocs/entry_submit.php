@@ -1,5 +1,5 @@
 <?php
-require 'db.php';  // 共通DB接続
+require 'db.php';
 
 $seat = $_POST['seat'] ?? '';
 $time_slot = $_POST['time_slot'] ?? '';
@@ -56,7 +56,7 @@ echo '<div class="message-box">';
 
 if ($seat === '' || $student_id === '') {
     echo '情報が不足しています。<br>座席または学籍番号が空です。';
-    echo '</div><div class="button-wrapper"><a href="top.php" class="back-button">トップに戻る</a></div>';
+    echo '</div><div class="button-wrapper"><a href="index.php" class="back-button">トップに戻る</a></div>';
     exit;
 }
 
@@ -78,7 +78,7 @@ try {
     echo h($e->getMessage());
 }
 
-echo '</div><div class="button-wrapper"><a href="top.php" class="back-button">トップに戻る</a></div>';
+echo '</div><div class="button-wrapper"><a href="index.php" class="back-button">トップに戻る</a></div>';
 ?>
 
 </body>
