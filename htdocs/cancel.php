@@ -9,7 +9,7 @@
   <h1>予約キャンセル</h1>
   <p>下のフォームに学籍番号を入力し、「キャンセルする」ボタンを押してください。</p>
 
-  <form action="cancel_cofirm.php" method="POST">
+  <form action="cancel_confirm.php" method="POST">
     <input type="text" name="student_id" placeholder="学籍番号を入力" required>
     
     <div class="button-row">
