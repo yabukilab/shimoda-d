@@ -16,7 +16,7 @@ echo '<!DOCTYPE html>
 if (empty($student_id)) {
     echo '<p class="confirm-message">学籍番号が入力されていません。</p>';
 } else {
-    $stmt = $pdo->prepare("DELETE FROM entries WHERE student_id = ?");
+    $stmt = $db->prepare("DELETE FROM entries WHERE student_id = ?");
     $stmt->execute([$student_id]);
 
     if ($stmt->rowCount() > 0) {
