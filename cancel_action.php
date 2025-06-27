@@ -1,7 +1,7 @@
 <?php
-require_once 'db.php';
+require 'db.php';
 
-$student_number = $_POST['student_number'] ?? '';
+$student_id = $_POST['student_id'] ?? '';
 
 echo '<!DOCTYPE html>
 <html lang="ja">
@@ -13,11 +13,11 @@ echo '<!DOCTYPE html>
 <body>
   <h1>キャンセル結果</h1>';
 
-if (empty($student_number)) {
+if (empty($student_id)) {
     echo '<p class="confirm-message">学籍番号が入力されていません。</p>';
 } else {
-    $stmt = $pdo->prepare("DELETE FROM reservations WHERE student_number = ?");
-    $stmt->execute([$student_number]);
+    $stmt = $pdo->prepare("DELETE FROM entries WHERE student_id = ?");
+    $stmt->execute([$student_id]);
 
     if ($stmt->rowCount() > 0) {
         echo '<p class="confirm-message">予約を正常にキャンセルしました。</p>';
@@ -26,7 +26,7 @@ if (empty($student_number)) {
     }
 }
 
-echo '<a href="index.php" class="back-button return-button">トップに戻る</a>
+echo '<a href="top.php" class="back-button return-button">トップに戻る</a>
 </body>
 </html>';
 ?>
