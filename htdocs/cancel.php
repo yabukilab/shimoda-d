@@ -14,7 +14,7 @@
     
     <div class="button-row">
       <a href="index.php" class="btn">戻る</a>
-      <button type="submit" class="btn">キャンセル</button>
+      <button type="submit" class="btn">キャンセルする</button>
     </div>
   </form>
 </body>

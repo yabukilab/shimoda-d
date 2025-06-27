@@ -1,13 +1,11 @@
 <?php
 
 require 'db.php';
+<<<<<<< HEAD
+=======
 
+>>>>>>> a93ee4b625b0469e97a2346aa275908ead83c9e9
 
-$student_id = $_POST['student_id'] ?? '';
-if (empty($student_id)) {
-  header("Location: cancel.php"); // 学籍番号がない場合は戻す
-  exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +23,8 @@ if (empty($student_id)) {
   <form action="cancel_action.php" method="POST">
     <input type="hidden" name="student_id" value="<?php echo htmlspecialchars($student_id); ?>">
     <div class="button-row">
-      <button type="submit" class="btn">キャンセル</button>
-      <a href="cancel.php" class="btn">戻る</a>
+     <a href="cancel.php" class="btn">戻る</a>
+     <button type="submit" class="btn">キャンセルする</button>
     </div>
   </form>
 </body>
