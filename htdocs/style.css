@@ -1,0 +1,148 @@
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 50px 20px 100px 20px;
+    font-size: 20px;
+}
+
+h1 {
+    margin-top: 0px;
+    margin-bottom: 45px;
+    font-size: 36px;
+}
+
+p {
+    margin-top: 10px;
+    margin-bottom: 70px;
+}
+
+.confirm-message {
+    margin-top: 60px;
+    margin-bottom: 70px;
+}
+
+.menu-button {
+    display: block;
+    width: 350px;
+    margin: 60px auto;  /* メニューボタンだけ上下の余白を60pxに */
+    padding: 20px;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.menu-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.time-button {
+    display: block;
+    width: 350px;
+    margin: 30px auto;  /* 時間ボタンは元のまま */
+    padding: 20px;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.time-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 横3列 */
+    gap: 30px;                              /* ボタン間の余白 */
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    justify-items: center;                 /* ボタンをグリッド内中央寄せ */
+}
+
+.time-grid form {
+    margin: 0;  /* formの余白を消す（ボタン間のズレ防止） */
+}
+
+.back-button {
+    display: block;
+    width: 120px;
+    padding: 10px 20px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin : 50px auto 0 auto;
+    text-align: center;
+}
+
+
+.back-button:hover {
+    background-color: #666;
+}
+
+input[type="text"] {
+    font-size: 20px;
+    padding: 6px;
+    width: 225px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 80px;
+}
+
+.back-button.return-button {
+    background-color: #777;  /* 例：戻るボタン専用色 */
+    font-size: 14px;
+    padding: 10px 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.back-button.return-button:hover {
+    background-color: #555;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;  /* 横中央揃え */
+  gap: 60px;                /* ボタン間の間隔 */
+  margin-top: 30px;
+}
+
+.btn {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  min-width: 120px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #666;
+  transform: translateY(-2px);
+}
+
