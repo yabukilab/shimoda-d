@@ -36,7 +36,7 @@ try {
     echo "<h2>予約完了！</h2>";
     echo "<p>座席: {$seat} を学籍番号: {$student_id} で予約しました。<br>時間帯: {$time_slot}</p>";
     echo '<br><a href="seat_select.php">座席表に戻る</a>';
-    echo '<br><a href="top.php">トップページへ戻る</a>';
+    echo '<br><a href="index.php">トップページへ戻る</a>';
 
 } catch (PDOException $e) {
     echo "データベースエラー: " . htmlspecialchars($e->getMessage());
