@@ -1,0 +1,69 @@
+.seat-map {
+  display: grid;
+  grid-template-columns: repeat(16, 40px);
+  gap: 6px;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  background-color: #00aaff;
+  border: 1px solid #000;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: inline-block;
+}
+
+.seat:hover {
+  background-color: #0080cc;
+}
+
+.seat.reserved {
+  background-color: red;
+  border: 1px solid #000;
+}
+
+.seat.reserved:hover {
+  background-color: #cc0000;
+}
+
+
+.empty {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+  position: relative;
+  margin: 0;  /* ← スクロール防止 */
+  padding: 10px 20px 100px 20px;
+}
+
+.back-button {
+  position: absolute;
+  top: 0px;  /* ← ここで下げる */
+  right: 20px;
+  width: 80px;
+}
+
+.back-button a {
+  text-decoration: none;
+  padding: 8px 16px;
+  background-color: #444;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.back-button a:hover {
+  background-color: #666;
+}
