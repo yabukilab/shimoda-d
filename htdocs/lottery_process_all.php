@@ -1,5 +1,9 @@
 <?php
 require 'db.php';
+if (!isset($db) || $db === null) {
+    echo "DB接続に失敗しています。抽選処理を中止します。\n";
+    exit;
+}
 
 echo "抽選処理を開始します...\n";
 
