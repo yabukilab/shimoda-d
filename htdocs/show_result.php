@@ -62,7 +62,7 @@ if ($results) {
 <?php endif; ?>
 
   <div class="button-row">
-    <button onclick="location.href='top.php'">トップへ戻る</button>
+    <button onclick="location.href='index.php'">トップへ戻る</button>
   </div>
 </div>
 </body>
