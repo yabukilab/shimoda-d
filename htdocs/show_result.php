@@ -41,16 +41,16 @@ if ($results) {
   <h2>抽選結果</h2>
 
 <?php if ($status === "win"): ?>
-    <p>以下の座席に当選しました：</p>
-    <table>
-      <tr>
-        <th>時間帯</th>
-        <th>座席</th>
+    <p>以下の座席に当選しました。</p>
+    <table style="margin: 0 auto; border-collapse: collapse; width: 80%; max-width: 600px;">
+      <tr style="background-color: #f0f0f0;">
+        <th style="border: 1px solid #ccc; padding: 8px;">時間帯</th>
+        <th style="border: 1px solid #ccc; padding: 8px;">座席</th>
       </tr>
       <?php foreach ($results as $row): ?>
       <tr>
-        <td><?= htmlspecialchars($row['time_slot']) ?></td>
-        <td><?= htmlspecialchars($row['seat']) ?></td>
+        <td style="border: 1px solid #ccc; padding: 8px;"><?= h($row['time_slot']) ?></td>
+        <td style="border: 1px solid #ccc; padding: 8px;"><?= h($row['seat']) ?></td>
       </tr>
       <?php endforeach; ?>
     </table>
@@ -67,3 +67,4 @@ if ($results) {
 </div>
 </body>
 </html>
+

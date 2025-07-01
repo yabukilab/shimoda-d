@@ -1,9 +1,7 @@
 <?php
-// lottery_process_all.php
-
 require 'db.php';
 
-echo "抽選処理開始...\n";
+echo "抽選処理を開始します...\n";
 
 // 使用不可席・全席設定
 $rows = range('a', 'l');
@@ -30,14 +28,13 @@ try {
     $time_slots = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
     if (empty($time_slots)) {
-        echo "抽選対象時間帯がありません。\n";
+        echo "抽選対象の時間帯がありません。\n";
         exit;
     }
 
     foreach ($time_slots as $time_slot) {
-        echo "時間帯: {$time_slot} 抽選開始\n";
+        echo "\n=== 時間帯: {$time_slot} の抽選開始 ===\n";
 
-        // その時間帯の応募データ取得
         $stmt = $db->prepare("SELECT * FROM entries WHERE time_slot = ?");
         $stmt->execute([$time_slot]);
         $entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -54,52 +51,46 @@ try {
         }
 
         foreach ($grouped as $seat => $applicants) {
-            // その時間帯に既に予約済みか確認
-            $stmtCheck = $db->prepare("SELECT COUNT(*) FROM reservations WHERE seat = ? AND time_slot = ?");
-            $stmtCheck->execute([$seat, $time_slot]);
-            $isReserved = $stmtCheck->fetchColumn() > 0;
-
-            if ($isReserved) {
-                echo "{$seat} ({$time_slot}) は既に予約済み、スキップ。\n";
-                continue;
-            }
-
+            // 使用不可席はスキップ
             if (!in_array($seat, $availableSeatsBase)) {
                 echo "{$seat} は使用不可席のためスキップ。\n";
                 continue;
             }
 
-            if (count($applicants) === 1) {
-                // 応募者が1人だけ → 即当選
-                $student_id = $applicants[0]['student_id'];
-                $stmtInsert = $db->prepare("INSERT INTO reservations (student_id, seat, time_slot) VALUES (?, ?, ?)");
-                $stmtInsert->execute([$student_id, $seat, $time_slot]);
-                echo "{$student_id} が {$seat} ({$time_slot}) に即当選。\n";
-            } else {
-                // 複数応募 → 抽選
-                $winner = $applicants[array_rand($applicants)];
-                $student_id = $winner['student_id'];
-                $stmtInsert = $db->prepare("INSERT INTO reservations (student_id, seat, time_slot) VALUES (?, ?, ?)");
-                $stmtInsert->execute([$student_id, $seat, $time_slot]);
-                echo "{$student_id} が {$seat} ({$time_slot}) に抽選当選。\n";
-
-                // 外れた人は何もしない（落選）
+            // 既予約席はスキップ
+            $stmtCheck = $db->prepare("SELECT COUNT(*) FROM reservations WHERE seat = ? AND time_slot = ?");
+            $stmtCheck->execute([$seat, $time_slot]);
+            if ($stmtCheck->fetchColumn() > 0) {
+                echo "{$seat} ({$time_slot}) は既に予約済みのためスキップ。\n";
+                continue;
             }
+
+            if (count($applicants) === 1) {
+                $winner = $applicants[0];
+                echo "即当選: {$winner['student_id']} -> {$seat} ({$time_slot})\n";
+            } else {
+                $winner = $applicants[array_rand($applicants)];
+                echo "抽選当選: {$winner['student_id']} -> {$seat} ({$time_slot})\n";
+            }
+
+            // reservationsに当選者登録
+            $stmtInsert = $db->prepare("INSERT INTO reservations (student_id, seat, time_slot) VALUES (?, ?, ?)");
+            $stmtInsert->execute([$winner['student_id'], $seat, $time_slot]);
+
+            // 当選者をentriesから削除
+            $stmtDelete = $db->prepare("DELETE FROM entries WHERE student_id = ? AND seat = ? AND time_slot = ?");
+            $stmtDelete->execute([$winner['student_id'], $seat, $time_slot]);
         }
 
-        // 当選処理
-$stmtDelete = $db->prepare("DELETE FROM entries WHERE student_id = ? AND time_slot = ?");
-$stmtDelete->execute([$student_id, $time_slot]);
-
-
-        echo "時間帯 {$time_slot} の抽選完了。\n";
+        echo "=== 時間帯: {$time_slot} の抽選終了 ===\n";
     }
 
-    echo "全ての抽選処理が完了しました。\n";
+    echo "\n抽選処理が完了しました。\n";
 
 } catch (PDOException $e) {
-    echo "DBエラー: " . htmlspecialchars($e->getMessage()) . "\n";
+    echo "DBエラー: " . h($e->getMessage()) . "\n";
     exit;
 }
 ?>
+
 
