@@ -1,10 +1,6 @@
 <?php
-
+session_start();
 require 'db.php';
-<<<<<<< HEAD
-=======
-
->>>>>>> a93ee4b625b0469e97a2346aa275908ead83c9e9
 
 ?>
 
