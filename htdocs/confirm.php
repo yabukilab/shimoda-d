@@ -13,9 +13,12 @@ if ($seat === '' || $student_id === '') {
     exit;
 }
 
+ require 'db.php';
+
 try {
     // データベース接続
-    $pdo = new PDO('mysql:host=localhost;dbname=ens;charset=utf8', 'testuser', 'pass');
+    //$pdo = new PDO('mysql:host=localhost;dbname=ens;charset=utf8', 'testuser', 'pass');
+    $pdo = $db;
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // 予約済みかチェック（重複防止）
