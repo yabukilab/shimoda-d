@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: ens
+-- Host: localhost    Database: mydb
 -- ------------------------------------------------------
 -- Server version	10.4.32-MariaDB
 
@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `entries`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `seat` varchar(10) NOT NULL,
   `student_id` varchar(20) NOT NULL,
+  `seat` varchar(10) NOT NULL,
   `time_slot` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,6 @@ CREATE TABLE `entries` (
 
 LOCK TABLES `entries` WRITE;
 /*!40000 ALTER TABLE `entries` DISABLE KEYS */;
-INSERT INTO `entries` VALUES (26,'a1','2342134','11:00-11:29');
 /*!40000 ALTER TABLE `entries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,11 +49,12 @@ DROP TABLE IF EXISTS `reservations`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `student_id` varchar(20) DEFAULT NULL,
-  `seat` varchar(10) DEFAULT NULL,
-  `time_slot` varchar(20) DEFAULT NULL,
+  `student_id` varchar(20) NOT NULL,
+  `seat` varchar(10) NOT NULL,
+  `time_slot` varchar(30) NOT NULL,
+  `lottery_status` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +63,7 @@ CREATE TABLE `reservations` (
 
 LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
+INSERT INTO `reservations` VALUES (3,'2342134','b6','11:30-11:59',1),(4,'2342044','a1','11:00-11:29',1),(5,'2342001','a1','11:00-11:29',2),(6,'2342134','a4','11:00-11:29',1);
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -75,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-27 18:10:11
+-- Dump completed on 2025-07-04 15:34:16
