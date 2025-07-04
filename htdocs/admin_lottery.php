@@ -53,7 +53,8 @@ $token = "your_secret_token_here";
     <button id="runLottery" class="btn">抽選を実行</button>
     <button id="clearTables" class="btn">全データ削除</button>
     <div id="result"></div>
-    <button id="backButton" class="btn" onclick="location.reload()">抽選画面へ戻る</button>
+    <button id="backButton" class="btn" onclick="location.href='admin_lottery.php'">抽選画面へ戻る</button>
+
 </div>
 
 <script>
