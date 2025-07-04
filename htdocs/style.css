@@ -170,4 +170,11 @@ th {
   background-color: #f0f0f0;
 }
 
+/* ✅ スマホ表示時（画面幅が480px以下のとき）は1列表示にする */
+@media (max-width: 480px) {
+    .time-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+}
 
