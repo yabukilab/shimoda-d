@@ -16,7 +16,7 @@
     </div>
 
     <div class="button-row">
-      <button type="button" class="btn back-btn" onclick="location.href='top.php'">戻る</button>
+      <button type="button" class="btn back-btn" onclick="location.href='index.php'">戻る</button>
       <button type="submit" class="btn confirm-btn">確認</button>
     </div>
   </form>
