@@ -170,11 +170,15 @@ th {
   background-color: #f0f0f0;
 }
 
-/* ✅ スマホ表示時（画面幅が480px以下のとき）は1列表示にする */
 @media (max-width: 480px) {
     .time-grid {
         grid-template-columns: 1fr;
         max-width: 300px;
     }
+    .time-button {
+        width: 90%; /* ✅ スマホ時だけボタン幅を画面幅に合わせる */
+        max-width: 300px; /* さらに最大幅を制御 */
+    }
 }
+
 
