@@ -7,7 +7,7 @@ body {
 }
 
 h1 {
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 45px;
     font-size: 36px;
 }
@@ -22,31 +22,11 @@ p {
     margin-bottom: 70px;
 }
 
-.menu-button {
+.menu-button,
+.time-button {
     display: block;
     width: 90%;
     max-width: 350px;
-    margin: 60px auto;
-    padding: 20px;
-    font-size: 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.menu-button:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-}
-
-.time-button {
-    display: block;
-    width: 350px;
-    max-width: 90%;
     margin: 30px auto;
     padding: 20px;
     font-size: 20px;
@@ -59,6 +39,7 @@ p {
     transition: background-color 0.3s, transform 0.2s;
 }
 
+.menu-button:hover,
 .time-button:hover {
     background-color: #45a049;
     transform: translateY(-2px);
@@ -74,6 +55,7 @@ p {
 }
 
 .time-grid form {
+    width: 100%; /* 親要素のグリッド幅に合わせる */
     margin: 0;
 }
 
@@ -90,6 +72,7 @@ p {
     transition: background-color 0.3s;
     margin: 50px auto 0 auto;
     text-align: center;
+    text-decoration: none;
 }
 
 .back-button:hover {
@@ -128,7 +111,7 @@ input[type="text"] {
     justify-content: center;
     gap: 60px;
     margin-top: 30px;
-    flex-wrap: wrap; /* スマホで折り返し対応 */
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -170,17 +153,20 @@ th {
     background-color: #f0f0f0;
 }
 
-/* ✅ スマホ時のみ1列に変更（パソコン表示はそのまま） */
-@media (max-width: 480px) {
+/* ✅ スマホ向け：横幅768px以下で1列表示 */
+@media (max-width: 768px) {
     .time-grid {
         grid-template-columns: 1fr;
-        max-width: 320px;
+        max-width: 90%;
     }
-    .time-button {
+    .time-button,
+    .menu-button {
         width: 90%;
-        max-width: 320px;
+        max-width: 100%;
     }
 }
+
+
 
 
 
