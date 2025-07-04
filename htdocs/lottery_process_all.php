@@ -1,6 +1,4 @@
 <?php
-// lottery_process_all.php
-
 require 'db.php';
 
 ###########################
@@ -9,15 +7,16 @@ require 'db.php';
 $token = "your_secret_token_here"; // ★任意の強固な文字列に変更
 
 ###########################
-# WEB実行時の制御
+# POST 実行制御
 ###########################
-if (php_sapi_name() !== 'cli') {
-    echo "<pre>";
-    if (!isset($_GET['token']) || $_GET['token'] !== $token) {
-        echo "❌ 権限がありません。抽選処理は実行されません。\n";
-        echo "</pre>";
-        exit;
-    }
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo "❌ 抽選処理は管理者画面からのみ実行可能です。";
+    exit;
+}
+
+if (!isset($_POST['token']) || $_POST['token'] !== $token) {
+    echo "❌ 権限がありません。抽選処理は実行されません。";
+    exit;
 }
 
 ###########################
@@ -25,7 +24,6 @@ if (php_sapi_name() !== 'cli') {
 ###########################
 if (!isset($db) || $db === null) {
     echo "❌ DB接続に失敗しています。抽選処理を中止します。\n";
-    if (php_sapi_name() !== 'cli') echo "</pre>";
     exit;
 }
 
@@ -62,7 +60,6 @@ try {
 
     if (empty($time_slots)) {
         echo "⚠️ 抽選対象の時間帯がありません。\n";
-        if (php_sapi_name() !== 'cli') echo "</pre>";
         exit;
     }
 
@@ -78,7 +75,6 @@ try {
             continue;
         }
 
-        # 座席ごとに応募者グループ化
         $grouped = [];
         foreach ($entries as $entry) {
             $grouped[$entry['seat']][] = $entry;
@@ -97,7 +93,6 @@ try {
                 continue;
             }
 
-            # 抽選
             if (count($applicants) === 1) {
                 $winner = $applicants[0];
                 echo "✅ 即当選: {$winner['student_id']} -> {$seat} ({$time_slot})\n";
@@ -106,13 +101,29 @@ try {
                 echo "🎯 抽選当選: {$winner['student_id']} -> {$seat} ({$time_slot})\n";
             }
 
-            # reservationsに登録
-            $stmtInsert = $db->prepare("INSERT INTO reservations (student_id, seat, time_slot) VALUES (?, ?, ?)");
-            $stmtInsert->execute([$winner['student_id'], $seat, $time_slot]);
+            # 当選者を reservations に登録（lottery_status = 1）
+            $stmtInsertWin = $db->prepare(
+                "INSERT INTO reservations (student_id, seat, time_slot, lottery_status) VALUES (?, ?, ?, 1)"
+            );
+            $stmtInsertWin->execute([$winner['student_id'], $seat, $time_slot]);
 
-            # entriesから当選者削除
-            $stmtDelete = $db->prepare("DELETE FROM entries WHERE student_id = ? AND seat = ? AND time_slot = ?");
-            $stmtDelete->execute([$winner['student_id'], $seat, $time_slot]);
+            # 落選者を reservations に登録（lottery_status = 2）
+            foreach ($applicants as $applicant) {
+                if ($applicant['student_id'] !== $winner['student_id']) {
+                    $stmtInsertLose = $db->prepare(
+                        "INSERT INTO reservations (student_id, seat, time_slot, lottery_status) VALUES (?, ?, ?, 2)"
+                    );
+                    $stmtInsertLose->execute([$applicant['student_id'], $seat, $time_slot]);
+
+                    echo "❌ 落選: {$applicant['student_id']} -> {$seat} ({$time_slot})\n";
+                }
+
+                # entries から削除
+                $stmtDelete = $db->prepare(
+                    "DELETE FROM entries WHERE student_id = ? AND seat = ? AND time_slot = ?"
+                );
+                $stmtDelete->execute([$applicant['student_id'], $seat, $time_slot]);
+            }
         }
 
         echo "=== 時間帯: {$time_slot} の抽選終了 ===\n";
@@ -123,7 +134,8 @@ try {
 } catch (PDOException $e) {
     echo "❌ DBエラー: " . htmlspecialchars($e->getMessage()) . "\n";
 }
-
-if (php_sapi_name() !== 'cli') echo "</pre>";
 ?>
+
+
+
 

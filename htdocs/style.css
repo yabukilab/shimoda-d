@@ -107,7 +107,7 @@ input[type="text"] {
 }
 
 .back-button.return-button {
-    background-color: #777;  /* 例：戻るボタン専用色 */
+    background-color: #444;  /* 例：戻るボタン専用色 */
     font-size: 14px;
     padding: 10px 20px;
     margin-top: 30px;
@@ -115,10 +115,13 @@ input[type="text"] {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-decoration: none;  /* ✅ 下線を削除 */
 }
 
+
 .back-button.return-button:hover {
-    background-color: #555;
+    background-color: #666;
+    transform: translateY(-2px);
 }
 
 .button-row {
@@ -139,6 +142,7 @@ input[type="text"] {
   transition: background-color 0.3s, transform 0.2s;
   min-width: 120px;
   text-align: center;
+  text-decoration: none;  /* ✅ 下線を削除 */
 }
 
 .btn:hover {
