@@ -1,9 +1,9 @@
 <?php
 require 'db.php';
 
-$seat = $_POST['seat'] ?? '';
-$time_slot = $_POST['time_slot'] ?? '';
-$student_id = $_POST['student_id'] ?? '';
+$seat = trim($_POST['seat'] ?? '');
+$time_slot = trim($_POST['time_slot'] ?? '');
+$student_id = trim($_POST['student_id'] ?? '');
 
 ?>
 <!DOCTYPE html>
@@ -54,8 +54,16 @@ $student_id = $_POST['student_id'] ?? '';
 <?php
 echo '<div class="message-box">';
 
+// ✅ 空チェック
 if ($seat === '' || $student_id === '') {
     echo '情報が不足しています。<br>座席または学籍番号が空です。';
+    echo '</div><div class="button-wrapper"><a href="index.php" class="back-button">トップに戻る</a></div>';
+    exit;
+}
+
+// ✅ 学籍番号のバリデーション（7桁の数字）
+if (!preg_match('/^\d{7}$/', $student_id)) {
+    echo '学籍番号は7桁の数字で入力してください。';
     echo '</div><div class="button-wrapper"><a href="index.php" class="back-button">トップに戻る</a></div>';
     exit;
 }
@@ -75,7 +83,7 @@ try {
 
 } catch (PDOException $e) {
     echo 'データベースエラーが発生しました。<br>';
-    echo h($e->getMessage());
+    echo htmlspecialchars($e->getMessage());
 }
 
 echo '</div><div class="button-wrapper"><a href="index.php" class="back-button">トップに戻る</a></div>';
@@ -83,3 +91,4 @@ echo '</div><div class="button-wrapper"><a href="index.php" class="back-button">
 
 </body>
 </html>
+
